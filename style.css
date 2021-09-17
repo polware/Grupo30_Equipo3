@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+  font-family: Verdana, sans-serif;
+}
+
+body {
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: #b3c9f1;
+  color: rgb(21, 43, 235);
+}
+
+header {
+  height: 170px;
+  width: 100%;
+}
+
+section {
+  height: 490px;
+  color: rgb(21, 43, 235);
+  background-color: #ffffff;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+footer {
+  height: 140px;
+  width: 100%;
+  font-size: 75%;
+}
+
+.secc-info {
+  flex: 50%;
+  padding: 30px;
+  justify-content: space-around;  
+  text-align: justify;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+  
+  .form-control-dark {
+    color: rgb(255, 255, 255);
+    background-color: var(--bs-dark);
+    border-color: var(--bs-gray);
+  }
+  .form-control-dark:focus {
+    color: rgb(255, 255, 255);
+    background-color: var(--bs-dark);
+    border-color: #fff;
+    box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
+  }
+  
+  .bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+  }
+  
+  .text-small {
+    font-size: 95%;
+  }
+  
+  .dropdown-toggle {
+    outline: 0;
+  }
