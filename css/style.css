@@ -37,12 +37,22 @@ footer {
   text-align: justify;
 }
 
+.secc-recup {
+  margin-top: 70px;
+  flex: 50%;
+  padding-left: 7%;
+  justify-content: space-around;  
+  text-align: justify;
+}
+
 .secc-contac {
   flex: 50%;
   padding: 30px;
   justify-content: space-between;  
   text-align: center;
 }
+
+
 
 form{
   border: 1px solid rgb(21, 43, 235);
