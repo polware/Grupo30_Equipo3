@@ -1,0 +1,18 @@
+.modal-content{
+    background-color: LightGray;
+    opacity: .85;
+    padding: 0 20px;
+    box-shadow: 0px 0px 3px black;
+}
+
+.casilla{
+    box-shadow: 0px 0px 3px black; 
+}
+
+.col-md-6 input{
+    text-align: center;
+}
+
+.col-md-13 input{
+    text-align: center;
+}
