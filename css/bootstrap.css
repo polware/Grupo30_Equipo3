@@ -71,6 +71,27 @@
   }
 }
 
+.grad-border {
+  height: 2px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.left-border, .right-border {
+  width: 50%;
+  border-bottom: 3px solid #b3c9f1;
+  display: inline-block;
+}
+
+.left-border {
+  border-image: linear-gradient(270deg, #b3c9f1, rgb(129, 136, 230)) 1;
+}
+
+.right-border {
+  border-image: linear-gradient(90deg, #b3c9f1, rgb(129, 136, 230)) 1;
+}
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);

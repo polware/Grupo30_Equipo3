@@ -5,26 +5,26 @@
 
 body {
   margin-top: 0;
-  margin-bottom: 0;
-  background-color: #b3c9f1;
-  color: rgb(21, 43, 235);
+  margin-bottom: 0;  
+  color: rgb(21, 43, 235);  
+  background: #b3c9f1;
 }
 
 header {
   height: 140px;
-  width: 100%;
+  width: 100%;  
 }
 
 section {
   height: 510px;
-  color: rgb(21, 43, 235);
-  background-color: #ffffff;
+  color: rgb(21, 43, 235);  
+  background: #fff;
   overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;
 }
 
-footer {
+footer {  
   height: 140px;
   width: 100%;
   font-size: 75%;
@@ -52,7 +52,24 @@ footer {
   text-align: center;
 }
 
+.modal-content{
+  background-color: LightGray;
+  opacity: .85;
+  padding: 0 20px;
+  box-shadow: 0px 0px 3px black;
+}
 
+.casilla{
+  box-shadow: 0px 0px 3px black; 
+}
+
+.col-md-6 input{
+  text-align: center;
+}
+
+.col-md-13 input{
+  text-align: center;
+}
 
 form{
   border: 1px solid rgb(21, 43, 235);
@@ -110,21 +127,23 @@ form{
   border-radius: 7px;
 }
 
-.modal-content{
-    background-color: LightGray;
-    opacity: .85;
-    padding: 0 20px;
-    box-shadow: 0px 0px 3px black;
+.grad-border {
+  height: 2px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
 }
 
-.casilla{
-    box-shadow: 0px 0px 3px black; 
+.left-border, .right-border {
+  width: 50%;
+  border-bottom: 3px solid #b3c9f1;
+  display: inline-block;
 }
 
-.col-md-6 input{
-    text-align: center;
+.left-border {
+  border-image: linear-gradient(270deg, #b3c9f1, rgb(129, 136, 230)) 1;
 }
 
-.col-md-13 input{
-    text-align: center;
+.right-border {
+  border-image: linear-gradient(90deg, #b3c9f1, rgb(129, 136, 230)) 1;
 }
