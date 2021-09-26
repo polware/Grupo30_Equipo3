@@ -26,9 +26,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "estudiante" */ '../views/Estudiante.vue')
   },
   {
-    path: '/recuperar',
-    name: 'Recuperar',
-    component: () => import(/* webpackChunkName: "recuperar" */ '../views/Recuperar.vue')
+    path: '/recuperarcuenta',
+    name: 'RecuperarCuenta',
+    component: () => import(/* webpackChunkName: "recuperarcuenta" */ '../views/RecuperarCuenta.vue')
   },
   {
     path: '/crearcuenta',
@@ -39,27 +39,12 @@ const routes = [
     path: '/test',
     name: 'Test',
     component: () => import(/* webpackChunkName: "test" */ '../views/Test.vue')
-  },
+  },  
   {
-    path: '/eliminar',
-    name: 'Eliminar',
-    component: () => import(/* webpackChunkName: "eliminar" */ '../views/Eliminar.vue')
-  },
-  {
-    path: '/actualizar',
+    path: '/actualizardatos',
     name: 'Actualizar',
-    component: () => import(/* webpackChunkName: "Actualizar" */ '../views/Actualizar.vue')
-  },
-  {
-    path: '/editar',
-    name: 'Editar',
-    component: () => import(/* webpackChunkName: "Editar" */ '../views/Editar.vue')
-  },
-  {
-    path: '/prueba',
-    name: 'Prueba',
-    component: () => import(/* webpackChunkName: "Prueba" */ '../views/Prueba.vue')
-  }
+    component: () => import(/* webpackChunkName: "actualizardatos" */ '../views/ActualizarDatos.vue')
+  }  
 ]
 
 const router = new VueRouter({
