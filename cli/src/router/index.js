@@ -42,9 +42,19 @@ const routes = [
   },  
   {
     path: '/actualizardatos',
-    name: 'Actualizar',
+    name: 'ActualizarDatos',
     component: () => import(/* webpackChunkName: "actualizardatos" */ '../views/ActualizarDatos.vue')
-  }  
+  },
+  {
+    path: '/borrarperfil',
+    name: 'BorrarPerfil',
+    component: () => import(/* webpackChunkName: "borrarperfil" */ '../views/BorrarPerfil.vue')
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue')
+  }
 ]
 
 const router = new VueRouter({

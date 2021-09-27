@@ -12,6 +12,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="navbar-nav mx-auto">
               <router-link to="/" class="nav-item nav-link">Inicio</router-link>
+              <router-link to="/Profile" class="nav-item nav-link">Mi Perfil</router-link>
               <router-link to="/Quienes" class="nav-item nav-link">Quiénes Somos</router-link>
               <router-link to="/Contactenos" class="nav-item nav-link">Contáctenos</router-link>
               <router-link to="/Estudiante" class="nav-item nav-link">Estudiantes</router-link>
