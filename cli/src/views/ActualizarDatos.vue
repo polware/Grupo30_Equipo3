@@ -1,31 +1,112 @@
 <template>
   <div class="actualizardatos">
-    <section class="t1">
+    <b-alert
+            :show="dismissCountDown"
+            dismissible
+            :variant="mensaje.color"
+            @dismissed="dismissCountDown=0"
+            @dismiss-count-down="countDownChanged">
+            {{mensaje.texto}}
+    </b-alert>
+    <section>
         <div class="secc-actualizar">
-            <form class="form_contac" type="text">
-                <h2 style="font-weight: bold;">Actualizar Datos</h2>
+            <form class="form_contac" @submit.prevent="manejarDatos(estudianteEditar)" type="text">
+                <h2>Actualizar Datos</h2>
                 <h5>"Puedes actualizar tus datos y no perderemos contacto"</h5><br>
+                <label for="id_estudiante">Id del Usuario:</label>
+                <input type="string" class="form-control-casilla" id="id_estudiante" size="40" value="id_usuario" v-model="estudianteEditar.numident" disabled><br><br>
                 <label for="nombre_actualizar">Nombre(s):</label>
-                <input type="text" class="form-control-casilla" id="nombre_actualizar" size="40" value="Escribe tu(s) Nombre(s)">
+                <input type="text" class="form-control-casilla" id="nombre_actualizar" size="40" value="Escribe tu(s) Nombre(s)" v-model="estudianteEditar.nombre" required>
                 <label for="apellido_actualizar">Apellidos(s):</label>
-                <input type="text" class="form-control-casilla" id="apellido_actualizar" size="40" value="Escribe tu(s) Apellido(s)"><br><br>    
+                <input type="text" class="form-control-casilla" id="apellido_actualizar" size="40" value="Escribe tu(s) Apellido(s)" v-model="estudianteEditar.apellido" required><br><br>    
                 <label for="correo_actualizar">Nuevo Correo Electrónico:</label>
-                <input type="text" class="form-control-casilla" id="correo_actualizar" size="35" value="Escribe nuevo correo electrónico">
+                <input type="email" class="form-control-casilla" id="correo_actualizar" size="35" value="Escribe nuevo correo electrónico" v-model="estudianteEditar.correo" required>
                 <label for="contrasena_actualizar">Nueva Contraseña:</label>
-                <input type="text" class="form-control-casilla" id="contrasena_actualizar" size="35" value="Escribe nueva contraseña"><br><br>    
+                <input type="password" class="form-control-casilla" id="contrasena_actualizar" size="35" value="Escribe nueva contraseña" v-model="estudianteEditar.password" required><br><br>    
                 <label for="nacimientos_actualizar">Fecha de Nacimiento:</label>
-                <input type="date" class="form-control-casilla" id="nacimientos_actualizar" size="20">
+                <input type="date" class="form-control-casilla" id="nacimientos_actualizar" size="20" v-model="estudianteEditar.fechanac" required>
                 <label for="ciudad_actualizar">Ciudad</label>
-                <input type="text" class="form-control-casilla" id="ciudad_actualizar" size="20">
+                <input type="text" class="form-control-casilla" id="ciudad_actualizar" size="20" v-model="estudianteEditar.ciudad" required>
                 <label for="institucion_actualizar">Colegio/Institución</label>
-                <input type="text" class="form-control-casilla" id="institucion_actualizar" size="20"><br><br>
-                <input type="submit" class="form-control-casilla" value="Actualizar ">
+                <input type="text" class="form-control-casilla" id="institucion_actualizar" size="20" v-model="estudianteEditar.colegio" required><br><br>
+                <b-button class="btn-warning my-2 mx-2" type="submit">Guardar</b-button>
+                <router-link :to="{name: 'Profile', params: {id:estudianteEditar._id} }" class="btn btn-secondary">Cancelar</router-link>
             </form>
         </div>
     </section>
 </div>
 </template>
+<script>
+import axios from "axios";
+export default {
+    data() {
+        return {
+            estudianteEditar: {},
+            mensaje: {color: '', texto: ''},
+            dismissSecs: 5,
+            dismissCountDown: 0
+        }
+    },
+    created() {        
+        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.id}`;
+        axios.get(apiURL).then((res) => {
+                this.estudianteEditar = res.data
+            })
+            .catch(e=>{
+                console.log(e.response)
+            })
+    },
+
+    methods: {   
+        
+        manejarDatos(registro) {
+            this.axios.put(`/estudiante/${registro._id}`, registro)
+            .then(res=>{
+                console.log(res)
+                this.$router.push('/ActualizarDatos')
+                this.mensaje.color='success';
+                this.mensaje.texto='¡Datos actualizados!'
+                this.showAlert()
+                this.estudianteEditar.numident='';
+                this.estudianteEditar.password='';
+                this.estudianteEditar.nombre='';                
+                this.estudianteEditar.apellido='';
+                this.estudianteEditar.correo='';
+                this.estudianteEditar.fechanac='';
+		        this.estudianteEditar.colegio='';
+                this.estudianteEditar.ciudad='';
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        },
+        
+        countDownChanged(dismissCountDown) {
+            this.dismissCountDown = dismissCountDown
+        },
+        
+        showAlert() {
+            this.dismissCountDown = this.dismissSecs
+        },
+
+        alerta(){
+            this.mensaje.color = 'danger';
+            this.mensaje.texto = 'Probando alerta';
+            this.showAlert();
+        }
+                              
+    },
+}
+</script>
 <style lang="scss">
+footer {
+  font-family: Verdana, sans-serif;
+  color: #fff;
+  min-height: 190px;
+  width: 100%;
+  font-size: 80%;
+  background: #0d6efd;
+  }
 section {
   height: 517px;
   font-family: Verdana, sans-serif;
@@ -35,21 +116,6 @@ section {
   display: flex;
   flex-wrap: wrap;
 }
-footer {
-  font-family: Verdana, sans-serif;
-  color: #fff;
-  min-height: 190px;
-  width: 100%;
-  font-size: 80%;
-  background: #0d6efd;
-  }
-.secc-info {
-  flex: 50%;
-  padding: 30px;
-  justify-content: space-around;  
-  text-align: justify;
-}
-
 h2 {
   font-family: "Inter", sans-serif;
 	color: mix(#fff, #152beb, 10%);

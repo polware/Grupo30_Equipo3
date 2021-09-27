@@ -14,9 +14,9 @@
           <h6 style="font-size: 0.9em"><router-link to="/RecuperarCuenta">¿Olvidaste tu contraseña?</router-link></h6>
           <hr class="solid">
           <router-link to="/CrearCuenta" ><b-button variant="outline-success" style="width:208px">Crear Cuenta</b-button></router-link>
-        </div>        
+        </div>
       </div>        
-    </section>          
+    </section>
   </div>
 </template>
 <style lang="scss">
