@@ -3,7 +3,8 @@
     <section class="t1">
         <div class="secc-contac">
             <form class="form_contac" type="text">
-                <h2 style="font-weight: bold;">Contactenos</h2>
+                <h2>Contáctenos</h2>
+                <br>
                 <h5>"Para nosotros es muy importante su opinión y estamos dispuestos a atender sus dudas y sugerencias"</h5><br>
                 <label for="nomapellido">Nombre(s) y Apellido(s):</label>
                 <input type="text" class="form-control-casilla" id="nomapellido" size="40" value="Escribe tu(s) Nombre(s) y Apellido(s)">

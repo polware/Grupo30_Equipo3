@@ -1,6 +1,5 @@
-<template>
-    <section>
-    <div class="container">
+<template>    
+    <div>
         <b-alert
             :show="dismissCountDown"
             dismissible
@@ -8,77 +7,77 @@
             @dismissed="dismissCountDown=0"
             @dismiss-count-down="countDownChanged">
             {{mensaje.texto}}
-        </b-alert>            
+        </b-alert>
         <br>
+        <form class="contenido">
         <b-card bg-variant="light">
             <h2>Eliminar Perfil</h2>
-            <br>
+            <hr>
             <b-container fluid>
                 <b-row class="my-2">
-                    <b-col sm="2"><label for="input-none">No. de identificación:</label></b-col>
-                    <b-col sm="4">
+                    <b-col sm="4"><label for="input-none">No. de identificación:</label></b-col>
+                    <b-col sm="6">
                     <b-form-input type="text" id="input-none" :state="null" placeholder="No. de Identificación Personal" v-model="estudianteBorrar.numident" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
-                    <b-col sm="2"><label for="input-none">Contraseña:</label></b-col>
-                    <b-col sm="4">
+                    <b-col sm="4"><label for="input-none">Contraseña:</label></b-col>
+                    <b-col sm="6">
                     <b-form-input type="password" id="input-none" :state="null" placeholder="Contraseña" v-model="estudianteBorrar.password" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
-                    <b-col sm="2"><label for="input-none">Nombre(s):</label></b-col>
-                    <b-col sm="4">
+                    <b-col sm="4"><label for="input-none">Nombre(s):</label></b-col>
+                    <b-col sm="6">
                     <b-form-input type="text" id="input-none" :state="null" placeholder="Nombre(s)" v-model="estudianteBorrar.nombre" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
-                    <b-col sm="2"><label for="input-none">Apellido(s):</label></b-col>
-                    <b-col sm="4">
+                    <b-col sm="4"><label for="input-none">Apellido(s):</label></b-col>
+                    <b-col sm="6">
                     <b-form-input type="text" id="input-none" :state="null" placeholder="Apellido(s)" v-model="estudianteBorrar.apellido" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
-                    <b-col sm="2"><label for="input-none">Correo electrónico:</label></b-col>
-                    <b-col sm="4">
+                    <b-col sm="4"><label for="input-none">Correo electrónico:</label></b-col>
+                    <b-col sm="6">
                     <b-form-input type="text" id="input-none" :state="null" placeholder="Correo electrónico" v-model="estudianteBorrar.correo" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
-                    <b-col sm="2"><label for="input-none">Fecha de nacimiento:</label></b-col>
-                    <b-col sm="4">
+                    <b-col sm="4"><label for="input-none">Fecha de nacimiento:</label></b-col>
+                    <b-col sm="6">
                     <b-form-input type="date" id="input-none" :state="null" placeholder="Fecha de nacimiento" v-model="estudianteBorrar.fechanac" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
-                    <b-col sm="2"><label for="input-none">Colegio:</label></b-col>
-                    <b-col sm="4">
+                    <b-col sm="4"><label for="input-none">Colegio:</label></b-col>
+                    <b-col sm="6">
                     <b-form-input type="text" id="input-none" :state="null" placeholder="Colegio" v-model="estudianteBorrar.colegio" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
-                    <b-col sm="2"><label for="input-none">Ciudad:</label></b-col>
-                    <b-col sm="4">
+                    <b-col sm="4"><label for="input-none">Ciudad:</label></b-col>
+                    <b-col sm="6">
                     <b-form-input type="text" id="input-none" :state="null" placeholder="Ciudad" v-model="estudianteBorrar.ciudad" disabled></b-form-input>
                     </b-col>
                 </b-row>
-
                 <br>
                     <b-button @click.prevent="borrarPerfil(estudianteBorrar._id)" class="btn-danger my-2 mx-2">Eliminar</b-button>
                     <router-link :to="{name: 'Profile', params: {id:estudianteBorrar._id} }" class="btn btn-secondary">Cancelar</router-link>
-            </b-container>
-            <br>
+                <br>
+	    </b-container>
         </b-card>
+	</form>
         <br>
-        </div>    
-    </section>
+</div>
 </template>
 <script>
 import axios from "axios";
@@ -141,6 +140,14 @@ export default {
 }
 </script>
 <style lang="scss">
+.contenido{
+    font-family: Verdana, sans-serif;
+    overflow-y: scroll;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+
 footer {
   font-family: Verdana, sans-serif;
   color: #fff;
@@ -150,17 +157,6 @@ footer {
   background: #0d6efd;
   }
 
-section {
-  min-height: 517px;
-  font-family: Verdana, sans-serif;
-  color: rgb(21, 43, 235);
-  background: #fff;  
-  overflow: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  text-align: center;  
-}
 h2 {
     font-family: "Inter", sans-serif;
     text-align: center;
