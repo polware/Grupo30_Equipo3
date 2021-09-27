@@ -1,31 +1,39 @@
-<template>
+<template>    
     <section>
+    <b-alert
+            :show="dismissCountDown"
+            dismissible
+            :variant="mensaje.color"
+            @dismissed="dismissCountDown=0"
+            @dismiss-count-down="countDownChanged">
+            {{mensaje.texto}}
+    </b-alert>
     <div class="modal-dialog text-center">    
       <div class="mb-3 row">                  
         <div class="modal-content">           
           <div class="col-12">                
             <br>
-            <h2>Crea tu cuenta...</h2>
+            <h2>Crear Cuenta</h2>
             <br>
           </div>
-          <form class="row g-3">
+          <form class="row g-3" @submit.prevent="agregarEstud()">
             <div class="col-md-6">
-              <input type="text" class="form-control casilla" placeholder="Nombre(s)">
+              <input type="text" class="form-control casilla" placeholder="Nombre(s)" v-model="objEstudiante.nombre">
             </div>
             <div class="col-md-6">
-              <input type="text" class="form-control casilla" placeholder="Apellido(s)">
+              <input type="text" class="form-control casilla" placeholder="Apellido(s)" v-model="objEstudiante.apellido">
             </div>
             <div class="col-md-13">
-              <input type="email" class="form-control casilla" placeholder="Correo electrónico">
+              <input type="email" class="form-control casilla" placeholder="Correo electrónico" v-model="objEstudiante.correo">
             </div>
             <div class="col-md-6">
-              <input type="text" class="form-control casilla" placeholder="Usuario">
+              <input type="text" class="form-control casilla" placeholder="No. ID de usuario" v-model="objEstudiante.numident">
             </div>
             <div class="col-md-6">
-              <input type="password" class="form-control casilla" placeholder="Contraseña">
+              <input type="password" class="form-control casilla" placeholder="Contraseña" v-model="objEstudiante.password">
             </div>
             <div class="col-12">
-              <button type="submit" class="btn btn-success casilla">Registrar</button>
+              <b-button type="submit" class="btn btn-success casilla">Registrar</b-button>
               <br>
               <br>              
             </div>
@@ -35,14 +43,81 @@
     </div>  
   </section> 
 </template>
+<script>
+export default {
+    data() {
+        return {
+            estudiantes:[],
+            objEstudiante:{numident:'', password:'', nombre:'', apellido:'', correo:'', fechanac:'', colegio:'', ciudad:''},
+            mensaje: {color: '', texto: ''},
+            dismissSecs: 5,
+            dismissCountDown: 0
+        }
+    },
+    created() {        
+         this.axios.get('/estudiante')
+            .then(res=>{
+                console.log(res.data)
+                this.estudiantes = res.data
+            })
+            .catch(e=>{
+                console.log(e.response)
+            })
+    },
 
+    methods: {
+        
+        agregarEstud(){
+            this.axios.post('/nuevo-estudiante', this.objEstudiante)
+            .then(res=>{
+                this.estudiantes.push(res.data)
+                this.objEstudiante.numident='';
+                this.objEstudiante.password='';
+                this.objEstudiante.nombre='';                
+                this.objEstudiante.apellido='';
+                this.objEstudiante.correo='';
+                this.objEstudiante.fechanac='';
+		            this.objEstudiante.colegio='';
+                this.objEstudiante.ciudad='';
+                //Limpieza de los campos
+                this.mensaje.color='success';
+                this.mensaje.texto='¡Estudiante Registrado!'
+                this.showAlert()
+            })
+            .catch(e=>{
+                console.log(e.response);
+                if(e.response.data.error.errors.nombre.message){
+                    this.mensaje.texto = e.response.data.error.errors.nombre.message
+                } else{
+                    this.mensaje.texto = '¡Error del Sistema!';
+                }
+                this.mensaje.color = 'danger';
+                this.showAlert()
+            })
+        },        
+
+        countDownChanged(dismissCountDown) {
+            this.dismissCountDown = dismissCountDown
+        },
+        
+        showAlert() {
+            this.dismissCountDown = this.dismissSecs
+        },
+
+        alerta(){
+            this.mensaje.color = 'danger';
+            this.mensaje.texto = 'Probando alerta';
+            this.showAlert();
+        }                               
+    },
+}
+</script>
 <style lang="scss">
 section {
   height: 517px;
   font-family: Verdana, sans-serif;
   color: rgb(21, 43, 235);
   background: #fff;
-  overflow-y: scroll;  
   display: flex;
   flex-wrap: wrap;
 }
@@ -54,12 +129,6 @@ footer {
   font-size: 80%;
   background: #0d6efd;
   }
-.secc-info {
-  flex: 50%;
-  padding: 30px;
-  justify-content: space-around;  
-  text-align: justify;
-}
 h2 {
   font-family: "Inter", sans-serif;
 	color: mix(#fff, #152beb, 10%);
