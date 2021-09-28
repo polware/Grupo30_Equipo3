@@ -21,9 +21,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "contactenos" */ '../views/Contactenos.vue')
   },
   {
-    path: '/estudiante',
-    name: 'Estudiante',
-    component: () => import(/* webpackChunkName: "estudiante" */ '../views/Estudiante.vue')
+    path: '/profile',
+    name: 'Profile',
+    component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue')
   },
   {
     path: '/recuperarcuenta',
@@ -42,9 +42,14 @@ const routes = [
   },  
   {
     path: '/actualizardatos',
-    name: 'Actualizar',
+    name: 'ActualizarDatos',
     component: () => import(/* webpackChunkName: "actualizardatos" */ '../views/ActualizarDatos.vue')
-  }  
+  },
+  {
+    path: '/borrarperfil',
+    name: 'BorrarPerfil',
+    component: () => import(/* webpackChunkName: "borrarperfil" */ '../views/BorrarPerfil.vue')
+  }
 ]
 
 const router = new VueRouter({
