@@ -15,17 +15,9 @@
           <hr class="solid">
           <router-link to="/CrearCuenta" ><b-button variant="outline-success" style="width:208px">Crear Cuenta</b-button></router-link>
         </div>
-        
-        
-      </div>
-      
-       
-          
-        
-        
+      </div> 
     </section>
-    
-    
+    <br> 
     <br>
   <footer class="footer">
       <div class="content has-text-centered">
