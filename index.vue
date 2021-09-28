@@ -11,7 +11,7 @@
           <router-link to="/CrearCuenta"><b-button variant="outline-primary" style="width:208px">Ingresar</b-button></router-link>
           <br>
           <br>
-          <h6 style="font-size: 0.9em"><router-link to="/Recuperar">¿Olvidaste tu contraseña?</router-link></h6>
+          <h6 style="font-size: 0.9em"><router-link to="/Recuperar">Recuperar Cuenta</router-link></h6>
           <hr class="solid">
           <router-link to="/CrearCuenta" ><b-button variant="outline-success" style="width:208px">Crear Cuenta</b-button></router-link>
         </div>
@@ -19,25 +19,6 @@
     </section>
     <br> 
     <br>
-  <footer class="footer">
-      <div class="content has-text-centered">
-          <b-container class="bv-example-row">
-            <b-row>
-              <b-col sm><br><br><img src="../img/Eslogan.jpeg" alt="Growing Skills" width="226" height="87"></b-col>
-              <b-col sm><br><h5>Integrantes Equipo 3</h5>Paul H. Vargas<br />Juan Pablo Pinzón<br />Jessica D. Páez<br />Laura Pacheco<br />Andrés Felipe Cruz</b-col>
-              <b-col sm><br><h5>Agradecimientos</h5>Ministerio TIC<br />Universidad Tecnológica de Pereira<br />Grace Fernández<br />Carlos A. Peña R.</b-col>
-              <b-col sm><br><br><a class="navbar-brand" href="https://www.misiontic2022.gov.co/portal/" target="_blank">
-                  <img src="../img/Logo-MisionTIC2022.jpg" alt="MisionTIC" width="147" height="88"></a></b-col>
-            </b-row>
-            <b-row>
-              <b-col sm><p style="font-weight: bold;">&copy; 2021 Derechos Reservados</p></b-col>
-              <b-col sm></b-col>
-              <b-col sm></b-col>
-              <b-col sm></b-col>
-            </b-row>
-          </b-container>              
-      </div>
-    </footer>
   </div>
 </template>
 <style lang="scss">
