@@ -1,5 +1,5 @@
 <template>    
-    <div>
+    <div class="borrarperfil">
         <b-alert
             :show="dismissCountDown"
             dismissible
@@ -73,10 +73,10 @@
                     <b-button @click.prevent="borrarPerfil(estudianteBorrar._id)" class="btn-danger my-2 mx-2">Eliminar</b-button>
                     <router-link :to="{name: 'Profile', params: {id:estudianteBorrar._id} }" class="btn btn-secondary">Cancelar</router-link>
                 <br>
-	    </b-container>
-        </b-card>
-	</form>
-        <br>
+            </b-container>
+            </b-card>
+            </form>
+            <br>
 </div>
 </template>
 <script>
@@ -102,25 +102,27 @@ export default {
 
     methods: {
         
-        borrarPerfil(id){
-            this.axios.delete(`/estudiante/${id}`)
-            .then(() => {
-                const index = this.estudianteBorrar.findIndex(item => item._id === res.data._id);
-                this.estudianteBorrar.splice(index, 1);
-                this.mensaje.color = 'danger';
-                this.mensaje.texto = '¡Su perfil ha sido eliminado!';
-                this.showAlert();
-                this.estudianteBorrar.numident='';
-                this.estudianteBorrar.password='';
-                this.estudianteBorrar.nombre='';                
-                this.estudianteBorrar.apellido='';
-                this.estudianteBorrar.correo='';
-                this.estudianteBorrar.fechanac='';
-		        this.estudianteBorrar.colegio='';
-                this.estudianteBorrar.ciudad='';
-            }).catch(error => {
-                console.log(error)
-            })
+        borrarPerfil(id){            
+                if (window.confirm("¿Está seguro que desea borrar la cuenta?")) {
+                    this.axios.delete(`/estudiante/${id}`)
+                    .then(() => {
+                        const index = this.estudianteBorrar.findIndex(item => item._id === res.data._id);
+                        this.estudianteBorrar.splice(index, 1);
+                        this.mensaje.color = 'danger';
+                        this.mensaje.texto = '¡Su perfil ha sido eliminado!';
+                        this.showAlert();
+                        this.estudianteBorrar.numident='';
+                        this.estudianteBorrar.password='';
+                        this.estudianteBorrar.nombre='';                
+                        this.estudianteBorrar.apellido='';
+                        this.estudianteBorrar.correo='';
+                        this.estudianteBorrar.fechanac='';
+                        this.estudianteBorrar.colegio='';
+                        this.estudianteBorrar.ciudad='';
+                    }).catch(error => {
+                        console.log(error)
+                        })
+                }
         },
 
         countDownChanged(dismissCountDown) {
@@ -147,7 +149,6 @@ export default {
     align-items: center;
     justify-content: center;    
 }
-
 footer {
   font-family: Verdana, sans-serif;
   color: #fff;
