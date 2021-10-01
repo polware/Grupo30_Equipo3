@@ -1,82 +1,86 @@
-<template>    
-    <div class="borrarperfil">
-        <b-alert
+<template>
+  <div class="borrarperfil">
+      <b-alert
             :show="dismissCountDown"
             dismissible
             :variant="mensaje.color"
             @dismissed="dismissCountDown=0"
             @dismiss-count-down="countDownChanged">
             {{mensaje.texto}}
-        </b-alert>
-        <br>
-        <form class="contenido">
+    </b-alert>  
+    <section>
+        <div>
+        <br>     
         <b-card bg-variant="light">
             <h2>Eliminar Perfil</h2>
             <hr>
+            <form ref="data">
             <b-container fluid>
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">No. de identificación:</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="text" id="input-none" :state="null" placeholder="No. de Identificación Personal" v-model="estudianteBorrar.numident" disabled></b-form-input>
+                    <b-form-input type="text" ref="data" id="input-none" :state="null" placeholder="No. de Identificación Personal" v-model="estudianteBorrar.numident" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Contraseña:</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="password" id="input-none" :state="null" placeholder="Contraseña" v-model="estudianteBorrar.password" disabled></b-form-input>
+                    <b-form-input type="password" ref="data" id="input-none" :state="null" placeholder="Contraseña" v-model="estudianteBorrar.password" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Nombre(s):</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="text" id="input-none" :state="null" placeholder="Nombre(s)" v-model="estudianteBorrar.nombre" disabled></b-form-input>
+                    <b-form-input type="text" ref="data" id="input-none" :state="null" placeholder="Nombre(s)" v-model="estudianteBorrar.nombre" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Apellido(s):</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="text" id="input-none" :state="null" placeholder="Apellido(s)" v-model="estudianteBorrar.apellido" disabled></b-form-input>
+                    <b-form-input type="text" ref="data" id="input-none" :state="null" placeholder="Apellido(s)" v-model="estudianteBorrar.apellido" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Correo electrónico:</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="text" id="input-none" :state="null" placeholder="Correo electrónico" v-model="estudianteBorrar.correo" disabled></b-form-input>
+                    <b-form-input type="text" ref="data" id="input-none" :state="null" placeholder="Correo electrónico" v-model="estudianteBorrar.correo" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Fecha de nacimiento:</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="date" id="input-none" :state="null" placeholder="Fecha de nacimiento" v-model="estudianteBorrar.fechanac" disabled></b-form-input>
+                    <b-form-input type="date" ref="data" id="input-none" :state="null" placeholder="Fecha de nacimiento" v-model="estudianteBorrar.fechanac" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Colegio:</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="text" id="input-none" :state="null" placeholder="Colegio" v-model="estudianteBorrar.colegio" disabled></b-form-input>
+                    <b-form-input type="text" ref="data" id="input-none" :state="null" placeholder="Colegio" v-model="estudianteBorrar.colegio" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Ciudad:</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="text" id="input-none" :state="null" placeholder="Ciudad" v-model="estudianteBorrar.ciudad" disabled></b-form-input>
+                    <b-form-input type="text" ref="data" id="input-none" :state="null" placeholder="Ciudad" v-model="estudianteBorrar.ciudad" disabled></b-form-input>
                     </b-col>
                 </b-row>
                 <br>
-                    <b-button @click.prevent="borrarPerfil(estudianteBorrar._id)" class="btn-danger my-2 mx-2">Eliminar</b-button>
+                    <b-button @click.prevent="borrarPerfil(estudianteBorrar._id)" class="btn-danger my-2 mx-2" type="submit">Eliminar</b-button>&nbsp;
                     <router-link :to="{name: 'Profile', params: {id:estudianteBorrar._id} }" class="btn btn-secondary">Cancelar</router-link>
                 <br>
-            </b-container>
-            </b-card>
+	          </b-container>
             </form>
-            <br>
+      </b-card>	    
+       <br>
+      </div>
+  </section>
 </div>
 </template>
 <script>
@@ -101,24 +105,15 @@ export default {
     },
 
     methods: {
-        
+
         borrarPerfil(id){            
                 if (window.confirm("¿Está seguro que desea borrar la cuenta?")) {
                     this.axios.delete(`/estudiante/${id}`)
                     .then(() => {
-                        const index = this.estudianteBorrar.findIndex(item => item._id === res.data._id);
-                        this.estudianteBorrar.splice(index, 1);
                         this.mensaje.color = 'danger';
                         this.mensaje.texto = '¡Su perfil ha sido eliminado!';
                         this.showAlert();
-                        this.estudianteBorrar.numident='';
-                        this.estudianteBorrar.password='';
-                        this.estudianteBorrar.nombre='';                
-                        this.estudianteBorrar.apellido='';
-                        this.estudianteBorrar.correo='';
-                        this.estudianteBorrar.fechanac='';
-                        this.estudianteBorrar.colegio='';
-                        this.estudianteBorrar.ciudad='';
+                        this.$refs.data.value = '';
                     }).catch(error => {
                         console.log(error)
                         })
@@ -142,12 +137,22 @@ export default {
 }
 </script>
 <style lang="scss">
-.contenido{
-    font-family: Verdana, sans-serif;
-    overflow-y: scroll;
-    display: flex;
-    align-items: center;
-    justify-content: center;    
+.modal-footer{
+    background-color: #ffffff;
+    min-height: 15%;
+}
+.pre-formatted {
+  white-space: pre;
+  //color: #b62727;
+}
+section {
+  min-height: 527px;
+  font-family: Verdana, sans-serif;
+  background: #fff;
+  overflow-y: scroll;  
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 footer {
   font-family: Verdana, sans-serif;
@@ -157,7 +162,6 @@ footer {
   font-size: 80%;
   background: #0d6efd;
   }
-
 h2 {
     font-family: "Inter", sans-serif;
     text-align: center;

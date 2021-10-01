@@ -2,19 +2,17 @@
   <div id="app">
   <div id="nav">
     <nav class="container navbar navbar-expand-lg navbar-light bg-primary">
-      <a class="navbar-brand" href="#" >
-      <img src="./img/Logo.jpg" alt="Logo" width="200" height="134"></a>
+      <img src="./img/Logo.jpg" alt="Logo" width="200" height="134">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="navbar-nav mx-auto">
-              <router-link to="/" class="nav-item nav-link">Inicio</router-link>
-              <router-link to="/Profile" class="nav-item nav-link">Mi Perfil</router-link>
-	      <router-link to="/Quienes" class="nav-item nav-link">Quiénes Somos</router-link>
-              <router-link to="/Contactenos" class="nav-item nav-link">Contáctenos</router-link>
+            <router-link to="/" :active="true"><b-button :pill="true" variant="primary">Inicio</b-button></router-link>
+              <router-link to="/Profile"><b-button :pill="true" variant="primary">Mi Perfil</b-button></router-link>
+              <router-link to="/Quienes"><b-button :pill="true" variant="primary">Quiénes Somos</b-button></router-link>
+              <router-link to="/Contactenos"><b-button :pill="true" variant="primary">Contáctenos</b-button></router-link>
           </div>
       </div>
   </nav>
@@ -47,7 +45,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -60,8 +57,8 @@
   background: #0d6efd;
 
   a {
-    font-weight: bold;
-    color: #eee4c2;    
+      font-weight: bold;
+      color: #eee4c2;    
 
     &.router-link-exact-active {
         color: rgb(92, 87, 87);

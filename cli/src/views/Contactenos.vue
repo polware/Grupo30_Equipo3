@@ -8,23 +8,23 @@
             @dismiss-count-down="countDownChanged">
             {{mensaje.texto}}
     </b-alert>  
-    <section class="t1">
+    <section>
         <div class="secc-contac">
             <form class="form_contac" type="text" @submit.prevent="agregarContacto()">
                 <h2>Contáctenos</h2>
                 <br>
                 <h5>"Para nosotros es muy importante su opinión y estamos dispuestos a atender sus dudas y sugerencias"</h5><br>
                 <label for="nomapellido">Nombre(s) y Apellido(s):</label>
-                <input type="text" class="form-control-casilla" id="nomapellido" size="40" value="Escribe tu(s) Nombre(s) y Apellido(s)" v-model="objContacto.nombreapellido">
+                <input type="text" class="form-control-casilla" id="nomapellido" size="40" value="Escribe tu(s) Nombre(s) y Apellido(s)" v-model="objContacto.nombreapellido">&nbsp;
                 <label for="institucion">Institución:</label>
                 <input type="text" class="form-control-casilla" id="institucion" size="40" value="Nombre la Institución" v-model="objContacto.institucion"><br><br>    
                 <label for="correo">Correo Electrónico:</label><br>
                 <input type="email" class="form-control-casilla" id="correo" size="45" value="ejemplo@gmail.com" v-model="objContacto.correo"><br><br>
-                <label for="mensaje">Mensaje</label><br>
+                <label for="mensaje">Mensaje:</label><br>
                 <div>
                     <textarea name="mensaje" class="form-control-casilla" rows="7" cols="80" v-model="objContacto.mensaje">Escribe aquí tu mensaje...</textarea>
                 </div>
-                <input type="submit" class="form-control-casilla" value="Enviar">
+                <b-button class="btn-secondary my-2 mx-2" type="submit">Enviar</b-button>
             </form>
         </div>
     </section>
@@ -97,7 +97,7 @@ export default {
 </script>
 <style lang="scss">
 section {
-  height: 517px;
+  min-height: 517px;
   font-family: Verdana, sans-serif;
   color: rgb(21, 43, 235);
   background: #fff;
@@ -112,14 +112,7 @@ footer {
   width: 100%;
   font-size: 80%;
   background: #0d6efd;
-  }
-.secc-info {
-  flex: 50%;
-  padding: 30px;
-  justify-content: space-around;  
-  text-align: justify;
 }
-
 h2 {
   font-family: "Inter", sans-serif;
 	color: mix(#fff, #152beb, 10%);
@@ -141,7 +134,6 @@ h2 {
   justify-content: space-between;  
   text-align: center;
 }
-
 .secc-actualizar {
   flex: 50%;
   padding: 30px;

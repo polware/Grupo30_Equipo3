@@ -16,18 +16,18 @@
                 <label for="id_estudiante">Id del Usuario:</label>
                 <input type="string" class="form-control-casilla" id="id_estudiante" size="40" value="id_usuario" v-model="estudianteEditar.numident" disabled><br><br>
                 <label for="nombre_actualizar">Nombre(s):</label>
-                <input type="text" class="form-control-casilla" id="nombre_actualizar" size="40" value="Escribe tu(s) Nombre(s)" v-model="estudianteEditar.nombre" required>
+                <input type="text" class="form-control-casilla" id="nombre_actualizar" size="40" value="Escribe tu(s) Nombre(s)" v-model="estudianteEditar.nombre" required>&nbsp;
                 <label for="apellido_actualizar">Apellidos(s):</label>
                 <input type="text" class="form-control-casilla" id="apellido_actualizar" size="40" value="Escribe tu(s) Apellido(s)" v-model="estudianteEditar.apellido" required><br><br>    
                 <label for="correo_actualizar">Nuevo Correo Electrónico:</label>
-                <input type="email" class="form-control-casilla" id="correo_actualizar" size="35" value="Escribe nuevo correo electrónico" v-model="estudianteEditar.correo" required>
+                <input type="email" class="form-control-casilla" id="correo_actualizar" size="35" value="Escribe nuevo correo electrónico" v-model="estudianteEditar.correo" required>&nbsp;
                 <label for="contrasena_actualizar">Nueva Contraseña:</label>
                 <input type="password" class="form-control-casilla" id="contrasena_actualizar" size="35" value="Escribe nueva contraseña" v-model="estudianteEditar.password" required><br><br>    
                 <label for="nacimientos_actualizar">Fecha de Nacimiento:</label>
-                <input type="date" class="form-control-casilla" id="nacimientos_actualizar" size="20" v-model="estudianteEditar.fechanac" required>
-                <label for="ciudad_actualizar">Ciudad</label>
-                <input type="text" class="form-control-casilla" id="ciudad_actualizar" size="20" v-model="estudianteEditar.ciudad" required>
-                <label for="institucion_actualizar">Colegio/Institución</label>
+                <input type="date" class="form-control-casilla" id="nacimientos_actualizar" size="20" v-model="estudianteEditar.fechanac" required>&nbsp;
+                <label for="ciudad_actualizar">Ciudad:</label>
+                <input type="text" class="form-control-casilla" id="ciudad_actualizar" size="20" v-model="estudianteEditar.ciudad" required>&nbsp;
+                <label for="institucion_actualizar">Colegio/Institución:</label>
                 <input type="text" class="form-control-casilla" id="institucion_actualizar" size="20" v-model="estudianteEditar.colegio" required><br><br>
                 <b-button class="btn-warning my-2 mx-2" type="submit">Guardar</b-button>
                 <router-link :to="{name: 'Profile', params: {id:estudianteEditar._id} }" class="btn btn-secondary">Cancelar</router-link>
@@ -108,7 +108,7 @@ footer {
   background: #0d6efd;
   }
 section {
-  height: 517px;
+  height: 527px;
   font-family: Verdana, sans-serif;
   color: rgb(21, 43, 235);
   background: #fff;

@@ -1,16 +1,16 @@
-<template>    
-    <section>
-    <b-alert
+<template>
+  <div class="crearcuenta">
+      <b-alert
             :show="dismissCountDown"
             dismissible
             :variant="mensaje.color"
             @dismissed="dismissCountDown=0"
             @dismiss-count-down="countDownChanged">
             {{mensaje.texto}}
-    </b-alert>    
-    <div class="modal-dialog text-center">
-      <br>
-        <div class="modal-content">           
+    </b-alert>  
+    <section>
+        <div class="modal-dialog text-center">
+        <div class="modal-content">
           <div class="col-12">                
             <br>
             <h2>Crear Cuenta</h2>
@@ -40,8 +40,9 @@
             </div>
           </form>
         </div>
-    </div>  
-  </section> 
+        </div>
+    </section>
+</div>
 </template>
 <script>
 export default {
@@ -114,7 +115,7 @@ export default {
 </script>
 <style lang="scss">
 section {
-  height: 517px;
+  height: 527px;
   font-family: Verdana, sans-serif;
   color: rgb(21, 43, 235);
   background: #fff;

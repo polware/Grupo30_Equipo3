@@ -21,13 +21,12 @@
 </template>
 <style lang="scss">
 section {
-  height: 517px;
+  height: 527px;
   font-family: Verdana, sans-serif;
   color: rgb(21, 43, 235);
   background: #fff;
   display: flex;  
 }
-
 h2 {
   font-family: "Inter", sans-serif;
 	color: mix(#fff, #152beb, 10%);
@@ -51,19 +50,6 @@ footer {
   font-size: 80%;
   background: #0d6efd;
 }
-flotante {
-  width: 40%; 
-  height: 80%; 
-  position: relative; 
-  top: 30%; 
-  left: 50%; 
-  margin: -100px 0 0 -100px; 
-  box-sizing: border-box; 
-  box-shadow: -1px 0px 20px 6px #999; 
-  height: 460px; 
-  background-color:#e6e6e6
-}
-
 </style>
 <script>
 export default {

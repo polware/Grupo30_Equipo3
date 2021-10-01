@@ -19,7 +19,7 @@
 </template>
 <style lang="scss">
 .form-recup{
-  min-height: 493px;
+  min-height: 503px;
   font-family: Verdana, sans-serif;
   padding-left: 310px;
   width: 990px;
