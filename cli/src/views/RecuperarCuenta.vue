@@ -1,25 +1,29 @@
 <template>
   <div class="recuperar">
-    <h1>Esta es la página de Recuperar Cuenta/Contraseña</h1>
-    <br />
-    <form>
-      <h1>Recupera tu cuenta</h1>
-      <label for="email">Escribe tu correo para buscar tu cuenta</label><br />
-      <input type="text" id="email" name="email" /><br />
-      <input type="submit" value="Cancelar" />
-      <input type="submit" value="Buscar" />
-    </form>
-  </div>
+    <div class="container"> 
+      <br>
+      <form class="form-recup">
+        <br>
+        <br>
+        <h2>Recuperar Cuenta</h2>
+        <hr>
+        <label for="email">Escribe tu correo electrónico para buscar tu cuenta:</label><br><br>
+        <input type="email" id="email" name="email" /><br><br>
+        <b-button class="btn-success my-2 mx-2" type="submit">Buscar</b-button>&nbsp;
+        <b-button class="btn-primary my-2 mx-2" type="submit">Cancelar</b-button>
+        <br>
+        <br>
+      </form>
+    </div>
+</div>
 </template>
 <style lang="scss">
-section {
-  height: 517px;
+.form-recup{
+  min-height: 493px;
   font-family: Verdana, sans-serif;
-  color: rgb(21, 43, 235);
-  background: #fff;
-  overflow-y: scroll;
-  display: flex;
-  flex-wrap: wrap;
+  padding-left: 310px;
+  width: 990px;
+  align-content: center;
 }
 footer {
   font-family: Verdana, sans-serif;
@@ -28,12 +32,6 @@ footer {
   width: 100%;
   font-size: 80%;
   background: #0d6efd;
-}
-.secc-info {
-  flex: 50%;
-  padding: 30px;
-  justify-content: space-around;
-  text-align: justify;
 }
 h2 {
   font-family: "Inter", sans-serif;

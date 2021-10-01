@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="profile">
   <b-alert
         :show="dismissCountDown"
         dismissible
@@ -7,19 +7,23 @@
         @dismissed="dismissCountDown=0"
         @dismiss-count-down="countDownChanged">
         {{mensaje.texto}}
-  </b-alert> 
+  </b-alert>
+  <div class="section">
+          <br>
           <br>
           <h2>Perfil del Estudiante</h2>
           <hr>
+          <br>
           <div class="form-group" v-if="!validado">
             <br>
-            <input type="text" ref="groupId" placeholder="Digite su No. de Identificación" class="form-control">
+            <input type="text" ref="groupId" class="form-group" placeholder="Digite No. Identificación">
+            <br>
             <br>
             <b-button @click="consultarID()" class="btn-success my-2 mx-2">Buscar</b-button>
             <br>          
           </div>
 
-          <form class="section" v-if="validado">
+          <form v-if="validado">
           <div class="content has-text-centered">
           <b-container class="bv-example-row">
             <b-row>
@@ -30,7 +34,7 @@
               <b-col sm><img src="../img/View_Results.png" alt="Perfil" width="150" height="150"></b-col>
             </b-row>
             <b-row>
-              <b-col sm></b-col>
+              <b-col sm>ID de estudiante:</b-col>
               <b-col sm></b-col>
               <b-col sm></b-col>
               <b-col sm></b-col>
@@ -46,7 +50,7 @@
           </b-container>              
       </div>
       </form>
-    
+  </div>  
 </div>
 </template>
 <script>
@@ -88,7 +92,6 @@ export default {
             this.item = []
             const cod = this.identidad;
             item = this.registro.filter(i => i.numident === cod);
-	          //alert(item)
             if (item.length > 0) {
                 this.validado = true;
                 this.estudianteDatos = {_id:this.registro[index]._id, numident:this.registro[index].numident, password:this.registro[index].password, nombre:this.registro[index].nombre, apellido:this.registro[index].apellido, correo:this.registro[index].correo, fechanac:this.registro[index].fechanac, colegio:this.registro[index].colegio, ciudad:this.registro[index].ciudad}
@@ -120,12 +123,10 @@ export default {
 </script>
 <style lang="scss">
 .section {
-  min-height: 423px;
+  min-height: 517px;
   font-family: Verdana, sans-serif;
-  color: rgb(21, 43, 235);
   background: #fff;  
   overflow: auto;
-  display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -141,6 +142,7 @@ footer {
 
 h2 {
   font-family: "Inter", sans-serif;
+  text-align: center;
 	color: mix(#fff, #152beb, 10%);
 	font-size: calc(0.5em + 1.2vw);
 	font-weight: 800;

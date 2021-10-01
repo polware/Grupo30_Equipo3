@@ -7,9 +7,9 @@
             @dismissed="dismissCountDown=0"
             @dismiss-count-down="countDownChanged">
             {{mensaje.texto}}
-    </b-alert>
-    <div class="modal-dialog text-center">    
-      <div class="mb-3 row">                  
+    </b-alert>    
+    <div class="modal-dialog text-center">
+      <br>
         <div class="modal-content">           
           <div class="col-12">                
             <br>
@@ -33,13 +33,13 @@
               <input type="password" class="form-control casilla" placeholder="Contraseña" v-model="objEstudiante.password">
             </div>
             <div class="col-12">
+              <br>
               <b-button type="submit" class="btn btn-success casilla">Registrar</b-button>
               <br>
               <br>              
             </div>
           </form>
         </div>
-      </div>
     </div>  
   </section> 
 </template>
@@ -73,7 +73,7 @@ export default {
                 this.estudiantes.push(res.data)
                 this.objEstudiante.numident='';
                 this.objEstudiante.password='';
-                this.objEstudiante.nombre='';                
+                this.objEstudiante.nombre='';
                 this.objEstudiante.apellido='';
                 this.objEstudiante.correo='';
                 this.objEstudiante.fechanac='';
@@ -148,7 +148,7 @@ h2 {
 .modal-content{
     background-color: LightGray;
     opacity: .85;
-    padding: 0 20px;
+    padding: 20px;
     box-shadow: 0px 0px 3px black;
 }
 .casilla{

@@ -1,19 +1,19 @@
 <template>
 <div class="resultados">
-      <div class="container">
-      <b-alert
+  <b-alert
         :show="dismissCountDown"
         dismissible
         :variant="mensaje.color"
         @dismissed="dismissCountDown=0"
         @dismiss-count-down="countDownChanged">
         {{mensaje.texto}}
-      </b-alert>
+  </b-alert>
+      <div class="container">
+      <br>
       <br>
       <h2>Resultados del Test</h2>
       <hr>
-      <br>
-      
+      <br>      
       <div class="accordion" role="tablist">
           <b-card no-body class="mb-1">
             <b-card-header header-tag="header" class="p-1" role="tab">
@@ -70,7 +70,6 @@ export default {
     },
 
     methods: {
-
       countDownChanged(dismissCountDown) {
             this.dismissCountDown = dismissCountDown
       },
@@ -96,9 +95,16 @@ footer {
   font-size: 80%;
   background: #0d6efd;
   }
-
+.accordion {
+  min-height: 341px;
+  font-family: Verdana, sans-serif;
+  padding-left: 340px;
+  width: 950px;
+  align-content: center;
+}
 h2 {
   font-family: "Inter", sans-serif;
+  text-align: center;
 	color: mix(#fff, #152beb, 10%);
 	font-size: calc(0.5em + 1.2vw);
 	font-weight: 800;
