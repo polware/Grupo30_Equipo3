@@ -41,7 +41,7 @@
               <b-col sm><br><router-link :to="{name: 'ActualizarDatos', params: {id:estudianteDatos._id} }" class="btn btn-primary">Actualizar Datos</router-link></b-col>
               <b-col sm><br><router-link :to="{name: 'BorrarPerfil', params: {id:estudianteDatos._id} }" class="btn btn-primary">Eliminar Perfil</router-link></b-col>
               <b-col sm><br><router-link :to="{name: 'Test', params: {id:estudianteDatos._id} }" class="btn btn-primary">Realizar Test</router-link></b-col>
-              <b-col sm><br><router-link :to="{name: 'Contactenos', params: {id:estudianteDatos._id} }" class="btn btn-primary">Ver Resultados</router-link></b-col>              
+              <b-col sm><br><router-link :to="{name: 'Resultados', params: {id:estudianteDatos._id} }" class="btn btn-primary">Ver Resultados</router-link></b-col>              
             </b-row>
           </b-container>              
       </div>

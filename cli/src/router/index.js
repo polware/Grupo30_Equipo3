@@ -49,6 +49,11 @@ const routes = [
     path: '/borrarperfil',
     name: 'BorrarPerfil',
     component: () => import(/* webpackChunkName: "borrarperfil" */ '../views/BorrarPerfil.vue')
+  },
+  {
+    path: '/resultados',
+    name: 'Resultados',
+    component: () => import(/* webpackChunkName: "borrarperfil" */ '../views/Resultados.vue')
   }
 ]
 

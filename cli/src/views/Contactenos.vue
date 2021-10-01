@@ -1,20 +1,28 @@
 <template>
   <div class="contactenos">
+      <b-alert
+            :show="dismissCountDown"
+            dismissible
+            :variant="mensaje.color"
+            @dismissed="dismissCountDown=0"
+            @dismiss-count-down="countDownChanged">
+            {{mensaje.texto}}
+    </b-alert>  
     <section class="t1">
         <div class="secc-contac">
-            <form class="form_contac" type="text">
+            <form class="form_contac" type="text" @submit.prevent="agregarContacto()">
                 <h2>Contáctenos</h2>
                 <br>
                 <h5>"Para nosotros es muy importante su opinión y estamos dispuestos a atender sus dudas y sugerencias"</h5><br>
                 <label for="nomapellido">Nombre(s) y Apellido(s):</label>
-                <input type="text" class="form-control-casilla" id="nomapellido" size="40" value="Escribe tu(s) Nombre(s) y Apellido(s)">
+                <input type="text" class="form-control-casilla" id="nomapellido" size="40" value="Escribe tu(s) Nombre(s) y Apellido(s)" v-model="objContacto.nombreapellido">
                 <label for="institucion">Institución:</label>
-                <input type="text" class="form-control-casilla" id="institucion" size="40" value="Nombre la Institución"><br><br>    
+                <input type="text" class="form-control-casilla" id="institucion" size="40" value="Nombre la Institución" v-model="objContacto.institucion"><br><br>    
                 <label for="correo">Correo Electrónico:</label><br>
-                <input type="text" class="form-control-casilla" id="correo" size="45" value="ejemplo@gmail.com"><br><br>
+                <input type="email" class="form-control-casilla" id="correo" size="45" value="ejemplo@gmail.com" v-model="objContacto.correo"><br><br>
                 <label for="mensaje">Mensaje</label><br>
                 <div>
-                    <textarea name="mensaje" class="form-control-casilla" rows="7" cols="80">Escribe aquí tu mensaje...</textarea>
+                    <textarea name="mensaje" class="form-control-casilla" rows="7" cols="80" v-model="objContacto.mensaje">Escribe aquí tu mensaje...</textarea>
                 </div>
                 <input type="submit" class="form-control-casilla" value="Enviar">
             </form>
@@ -22,6 +30,71 @@
     </section>
 </div>
 </template>
+<script>
+export default {
+    data() {
+        return {
+            contactos:[],
+	        objContacto:{nombreapellido:'', correo:'', institucion:'', mensaje:''},
+            mensaje: {color: '', texto: ''},
+            dismissSecs: 5,
+            dismissCountDown: 0
+        }
+    },
+    created() {        
+         this.axios.get('/contacto')
+            .then(res=>{
+                console.log(res.data)
+                this.contactos = res.data
+            })
+            .catch(e=>{
+                console.log(e.response)
+            })
+    },
+
+    methods: {
+        
+        agregarContacto(){
+            this.axios.post('/nuevo-contacto', this.objContacto)
+            .then(res=>{
+                this.contactos.push(res.data)
+                this.objContacto.nombreapellido='';
+                this.objContacto.correo='';
+                this.objContacto.institucion='';
+                this.objContacto.mensaje='';
+                //Limpieza de los campos
+                this.mensaje.color='success';
+                this.mensaje.texto='¡Sus datos han sido registrados!'
+                this.showAlert()
+            })
+            .catch(e=>{
+                console.log(e.response);
+                if(e.response.data.error.errors.nombre.message){
+                    this.mensaje.texto = e.response.data.error.errors.nombre.message
+                } else{
+                    this.mensaje.texto = '¡Error del Sistema!';
+                }
+                this.mensaje.color = 'danger';
+                this.showAlert()
+            })
+        },        
+
+        countDownChanged(dismissCountDown) {
+            this.dismissCountDown = dismissCountDown
+        },
+        
+        showAlert() {
+            this.dismissCountDown = this.dismissSecs
+        },
+
+        alerta(){
+            this.mensaje.color = 'danger';
+            this.mensaje.texto = 'Probando alerta';
+            this.showAlert();
+        }                               
+    },
+}
+</script>
 <style lang="scss">
 section {
   height: 517px;
