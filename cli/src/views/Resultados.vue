@@ -36,8 +36,10 @@
               </b-card-body>
             </b-collapse>
           </b-card>
+          <br>
+          <br>
+          <router-link :to="{name: 'Profile', params: {id:estudianteresult._id} }" class="btn btn-success">Regresar</router-link>
        </div>
-      
        <br>
   </div>  
 </div>
@@ -54,7 +56,6 @@ export default {
             dismissCountDown: 0,
             texto1:'',
             texto2:'',
-            text: `Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry labore VHS.`
         }
     },
     created() {        

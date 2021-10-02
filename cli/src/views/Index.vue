@@ -4,11 +4,11 @@
       <div class="form-group" style="width: 40%; height: 70%; position: relative; top: 25%; left: 50%; margin: -100px 0 0 -100px; box-sizing: border-box; box-shadow: -1px 0px 20px 6px #999; height: 460px; background-color:#e6e6e6">
         <h2 style="font-weight: 700!important; margin-bottom: 0!important; font-size: calc(1.325rem + .9vw); padding:30px">Inicia Sesión</h2>
         <div class="form-group" style="width: 80%;position: absolute;left: 10%;right: 10%; padding:30px; height: 465px">
-          <input type="text" style="display: block; width: 100%; bottom: 5px; border-radius: 60px; text-align: center" placeholder="Usuario" class="form-control form-control-lg"/>
+          <input type="text" ref="usertext" style="display: block; width: 100%; bottom: 5px; border-radius: 60px; text-align: center" placeholder="Usuario" class="form-control form-control-lg"/>
           <br>
-          <input type="text" style="display: block; width: 100%; border-radius: 60px; text-align: center;" placeholder="Contraseña" class="form-control form-control-lg"/>
+          <input type="password" ref="passtext" style="display: block; width: 100%; border-radius: 60px; text-align: center;" placeholder="Contraseña" class="form-control form-control-lg"/>
           <br>
-          <router-link to="/CrearCuenta"><b-button variant="outline-primary" style="width:208px">Ingresar</b-button></router-link>
+          <b-button @click.prevent="BuscarUser()" variant="outline-primary" style="width:208px">Ingresar</b-button>
           <br>
           <br>
           <h6 style="font-size: 0.9em"><router-link to="/RecuperarCuenta">¿Olvidaste tu contraseña?</router-link></h6>
@@ -19,13 +19,86 @@
     </section>
   </div>
 </template>
+<script>
+export default {
+    data() {
+        return {
+            usuarioID:'',
+            usuarioPASS:'',
+            registro:[],
+            estudianteDatos: {},
+            mensaje: {color: '', texto: ''},
+            dismissSecs: 5,
+            dismissCountDown: 0,
+        }
+    },
+    created() {
+        this.axios.get('/estudiante')
+            .then(res=>{                
+                this.registro = res.data
+            })
+            .catch(e=>{
+                console.log(e.response)
+            })        
+    },
+    
+    methods: {
+
+        validando(){
+            this.usuarioID = this.$refs.usertext.value;
+            this.usuarioPASS = this.$refs.passtext.value;
+            const cod = this.usuarioID;
+            const pass = this.usuarioPASS;
+            if(this.estudianteDatos.numident === cod && this.estudianteDatos.password === pass){                
+                this.$router.push({name: 'Profile', params: {id:this.estudianteDatos._id} })
+            }
+            else {                
+                alert("Por favor verifique los datos ingresados, uno de ellos está mal escrito.")
+            }
+        },
+
+        BuscarUser(){
+            this.usuarioID = this.$refs.usertext.value;
+            const aux = this.usuarioID;
+            var item;
+            this.item = []
+            item = this.registro.filter(i => i.numident === aux);
+            if (item.length > 0) {
+                const index = this.registro.findIndex(n => n.numident === aux);
+                this.estudianteDatos = {_id:this.registro[index]._id, numident:this.registro[index].numident, password:this.registro[index].password}
+                this.validando();
+            }
+            else {                
+                alert("No se encontró su registro.\nPor favor verifique los datos ingresados.")
+            }
+        },
+
+        countDownChanged(dismissCountDown) {
+            this.dismissCountDown = dismissCountDown
+        },
+        
+        showAlert() {
+            this.dismissCountDown = this.dismissSecs
+        },
+
+        alerta(){
+            this.mensaje.color = 'danger';
+            this.mensaje.texto = 'Probando alerta';
+            this.showAlert();
+        }       
+                        
+    },
+  }
+</script>
 <style lang="scss">
 section {
   height: 527px;
   font-family: Verdana, sans-serif;
   color: rgb(21, 43, 235);
-  background: #fff;
-  display: flex;  
+  display: flex;
+  background-image: url("../img/Fondo.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 h2 {
   font-family: "Inter", sans-serif;
@@ -51,42 +124,3 @@ footer {
   background: #0d6efd;
 }
 </style>
-<script>
-export default {
-    data() {
-        return {
-            registro:[],
-            mensaje: {color: '', texto: ''},
-            dismissSecs: 5,
-            dismissCountDown: 0
-        }
-    },
-    created() {
-        this.axios.get('/estudiante')
-            .then(res=>{                
-                this.registro = res.data
-            })
-            .catch(e=>{
-                console.log(e.response)
-            })        
-    },
-    
-    methods: {
-        
-        countDownChanged(dismissCountDown) {
-            this.dismissCountDown = dismissCountDown
-        },
-        
-        showAlert() {
-            this.dismissCountDown = this.dismissSecs
-        },
-
-        alerta(){
-            this.mensaje.color = 'danger';
-            this.mensaje.texto = 'Probando alerta';
-            this.showAlert();
-        }       
-                        
-    },
-  }
-</script>
