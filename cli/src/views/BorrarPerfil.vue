@@ -19,56 +19,56 @@
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">No. de identificación:</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="text" ref="data" id="input-none" :state="null" placeholder="No. de Identificación Personal" v-model="estudianteBorrar.numident" disabled></b-form-input>
+                    <b-form-input type="text" id="input-none" :state="null" placeholder="No. de Identificación Personal" v-model="estudianteBorrar.numident" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Contraseña:</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="password" ref="data" id="input-none" :state="null" placeholder="Contraseña" v-model="estudianteBorrar.password" disabled></b-form-input>
+                    <b-form-input type="password" id="input-none" :state="null" placeholder="Contraseña" v-model="estudianteBorrar.password" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Nombre(s):</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="text" ref="data" id="input-none" :state="null" placeholder="Nombre(s)" v-model="estudianteBorrar.nombre" disabled></b-form-input>
+                    <b-form-input type="text" id="input-none" :state="null" placeholder="Nombre(s)" v-model="estudianteBorrar.nombre" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Apellido(s):</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="text" ref="data" id="input-none" :state="null" placeholder="Apellido(s)" v-model="estudianteBorrar.apellido" disabled></b-form-input>
+                    <b-form-input type="text" id="input-none" :state="null" placeholder="Apellido(s)" v-model="estudianteBorrar.apellido" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Correo electrónico:</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="text" ref="data" id="input-none" :state="null" placeholder="Correo electrónico" v-model="estudianteBorrar.correo" disabled></b-form-input>
+                    <b-form-input type="text" id="input-none" :state="null" placeholder="Correo electrónico" v-model="estudianteBorrar.correo" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Fecha de nacimiento:</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="date" ref="data" id="input-none" :state="null" placeholder="Fecha de nacimiento" v-model="estudianteBorrar.fechanac" disabled></b-form-input>
+                    <b-form-input type="date" id="input-none" :state="null" placeholder="Fecha de nacimiento" v-model="estudianteBorrar.fechanac" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Colegio:</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="text" ref="data" id="input-none" :state="null" placeholder="Colegio" v-model="estudianteBorrar.colegio" disabled></b-form-input>
+                    <b-form-input type="text" id="input-none" :state="null" placeholder="Colegio" v-model="estudianteBorrar.colegio" disabled></b-form-input>
                     </b-col>
                 </b-row>
 
                 <b-row class="my-2">
                     <b-col sm="4"><label for="input-none">Ciudad:</label></b-col>
                     <b-col sm="6">
-                    <b-form-input type="text" ref="data" id="input-none" :state="null" placeholder="Ciudad" v-model="estudianteBorrar.ciudad" disabled></b-form-input>
+                    <b-form-input type="text" id="input-none" :state="null" placeholder="Ciudad" v-model="estudianteBorrar.ciudad" disabled></b-form-input>
                     </b-col>
                 </b-row>
                 <br>
@@ -111,9 +111,16 @@ export default {
                     this.axios.delete(`/estudiante/${id}`)
                     .then(() => {
                         this.mensaje.color = 'danger';
-                        this.mensaje.texto = '¡Su perfil ha sido eliminado!';
+                        this.mensaje.texto = '¡Su cuenta ha sido eliminada!';
                         this.showAlert();
-                        this.$refs.data.value = '';
+			            this.estudianteBorrar.numident='';
+                        this.estudianteBorrar.password='';
+                        this.estudianteBorrar.nombre='';                
+                        this.estudianteBorrar.apellido='';
+                        this.estudianteBorrar.correo='';
+                        this.estudianteBorrar.fechanac='';
+                        this.estudianteBorrar.colegio='';
+                        this.estudianteBorrar.ciudad='';
                     }).catch(error => {
                         console.log(error)
                         })
@@ -137,14 +144,6 @@ export default {
 }
 </script>
 <style lang="scss">
-.modal-footer{
-    background-color: #ffffff;
-    min-height: 15%;
-}
-.pre-formatted {
-  white-space: pre;
-  //color: #b62727;
-}
 section {
   min-height: 527px;
   font-family: Verdana, sans-serif;
