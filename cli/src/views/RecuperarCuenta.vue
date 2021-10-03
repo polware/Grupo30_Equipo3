@@ -5,11 +5,11 @@
       <form class="form-recup">
         <br>
         <br>
-        <h2>Recuperar Cuenta</h2>
+        <h2>Recuperar Contraseña</h2>
         <hr>
-        <label for="email">Escribe tu correo electrónico para buscar tu cuenta:</label><br><br>
-        <input type="email" id="email" name="email" /><br><br>
-        <b-button class="btn-success my-2 mx-2" type="submit">Buscar</b-button>&nbsp;
+        <label for="email">Digita tu correo electrónico para buscar tu contraseña:</label><br><br>
+        <input type="email" ref="emailtext" name="email" /><br><br>
+        <b-button class="btn-success my-2 mx-2" @click.prevent="buscarEmail()" type="submit">Buscar</b-button>&nbsp;
         <b-button class="btn-primary my-2 mx-2" type="submit">Cancelar</b-button>
         <br>
         <br>
@@ -17,6 +17,65 @@
     </div>
 </div>
 </template>
+<script>
+export default {
+    data() {
+        return {
+            usuarioEmail:'',            
+            aviso:'',
+            registro:[],
+            estudianteDatos: {},
+            mensaje: {color: '', texto: ''},
+            dismissSecs: 5,
+            dismissCountDown: 0,
+        }
+    },
+    created() {
+        this.axios.get('/estudiante')
+            .then(res=>{                
+                this.registro = res.data
+            })
+            .catch(e=>{
+                console.log(e.response)
+            })        
+    },
+    
+    methods: {
+
+        buscarEmail(){
+            this.usuarioEmail = this.$refs.emailtext.value;
+            const aux = this.usuarioEmail;
+            var item;
+            this.item = []
+            item = this.registro.filter(i => i.correo === aux);            
+            if (item.length > 0) {
+                const index = this.registro.findIndex(n => n.correo === aux);
+                this.estudianteDatos = {_id:this.registro[index]._id, numident:this.registro[index].numident, password:this.registro[index].password}
+                alert("La contraseña de su cuenta es: " +this.estudianteDatos.password)
+            }
+            else {                
+                this.aviso = "El correo electrónico ingresado no existe en la base de datos.";
+                alert(this.aviso)
+            }
+        },
+
+        countDownChanged(dismissCountDown) {
+            this.dismissCountDown = dismissCountDown
+        },
+        
+        showAlert() {
+            this.dismissCountDown = this.dismissSecs
+        },
+
+        alerta(){
+            this.mensaje.color = 'danger';
+            this.mensaje.texto = 'Probando alerta';
+            this.showAlert();
+        }       
+                        
+    },
+  }
+</script>
 <style lang="scss">
 .form-recup{
   min-height: 503px;
