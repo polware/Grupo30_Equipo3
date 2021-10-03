@@ -10,7 +10,6 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="navbar-nav mx-auto">
             <router-link to="/" :active="true"><b-button :pill="true" variant="primary">Inicio</b-button></router-link>
-              <router-link to="/Profile"><b-button :pill="true" variant="primary">Mi Perfil</b-button></router-link>
               <router-link to="/Quienes"><b-button :pill="true" variant="primary">Quiénes Somos</b-button></router-link>
               <router-link to="/Contactenos"><b-button :pill="true" variant="primary">Contáctenos</b-button></router-link>
           </div>
