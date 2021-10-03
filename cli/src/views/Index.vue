@@ -8,7 +8,10 @@
           <br>
           <input type="password" ref="passtext" style="display: block; width: 100%; border-radius: 60px; text-align: center;" placeholder="Contraseña" class="form-control form-control-lg"/>
           <br>
-          <b-button @click.prevent="BuscarUser()" variant="outline-primary" style="width:208px">Ingresar</b-button>
+          <b-button v-b-modal.modal-tall @click.prevent="BuscarUser()" variant="outline-primary" style="width:208px" type="submit">Ingresar</b-button>
+                    <b-modal id="modal-tall" title="ERROR:" ok-only>
+                        <p class="pre-formatted">{{aviso}}</p>
+                    </b-modal>
           <br>
           <br>
           <h6 style="font-size: 0.9em"><router-link to="/RecuperarCuenta">¿Olvidaste tu contraseña?</router-link></h6>
@@ -25,6 +28,7 @@ export default {
         return {
             usuarioID:'',
             usuarioPASS:'',
+            aviso:'',
             registro:[],
             estudianteDatos: {},
             mensaje: {color: '', texto: ''},
@@ -53,7 +57,7 @@ export default {
                 this.$router.push({name: 'Profile', params: {id:this.estudianteDatos._id} })
             }
             else {                
-                alert("Por favor verifique los datos ingresados, uno de ellos está mal escrito.")
+                this.aviso = "Por favor verifique los datos, uno de ellos no coincide.";
             }
         },
 
@@ -69,7 +73,7 @@ export default {
                 this.validando();
             }
             else {                
-                alert("No se encontró su registro.\nPor favor verifique los datos ingresados.")
+                this.aviso = "No se encontró su registro.\nPor favor verifique los datos ingresados.";
             }
         },
 
@@ -122,5 +126,12 @@ footer {
   width: 100%;
   font-size: 80%;
   background: #0d6efd;
+}
+.modal-footer{
+    background-color: #ffffff;
+    min-height: 15%;
+}
+.pre-formatted {
+  white-space: pre;
 }
 </style>
