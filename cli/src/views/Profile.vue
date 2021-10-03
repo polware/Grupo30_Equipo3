@@ -14,16 +14,7 @@
           <h2>Perfil del Estudiante</h2>
           <hr>
           <br>
-          <div class="form-group" v-if="!validado">
-            <br>
-            <input type="text" ref="groupId" class="form-group" placeholder="Digite No. Identificación">
-            <br>
-            <br>
-            <b-button @click="consultarID()" class="btn-success my-2 mx-2">Buscar</b-button>
-            <br>          
-          </div>
-
-          <form v-if="validado">
+          <form>
           <div class="content has-text-centered">
           <b-container class="bv-example-row">
             <b-row>
@@ -54,55 +45,29 @@
 </div>
 </template>
 <script>
+import axios from "axios";
 export default {
     data() {
         return {
             registro:[],
-            validado: false,
+            estudianteDatos:[],
             usercode:'',
-            estudianteDatos: {},
             mensaje: {color: '', texto: ''},
             dismissSecs: 5,
             dismissCountDown: 0
         }
     },
     created() {
-        this.axios.get('/estudiante')
-            .then(res=>{                
-                this.registro = res.data
+        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.id}`;
+        axios.get(apiURL).then((res) => {
+                this.estudianteDatos = res.data
             })
             .catch(e=>{
                 console.log(e.response)
-            })        
+            })       
     },
     
     methods: {
-
-        encontrarID(){
-            this.identidad = this.$refs.groupId.value;
-            const aux = this.identidad;
-            const num = this.registro.findIndex(n => n.numident === aux);
-            return num;
-        },
-
-        consultarID(){
-            const index = this.encontrarID();
-            this.identidad = this.$refs.groupId.value;
-            var item;
-            this.item = []
-            const cod = this.identidad;
-            item = this.registro.filter(i => i.numident === cod);
-            if (item.length > 0) {
-                this.validado = true;
-                this.estudianteDatos = {_id:this.registro[index]._id, numident:this.registro[index].numident, password:this.registro[index].password, nombre:this.registro[index].nombre, apellido:this.registro[index].apellido, correo:this.registro[index].correo, fechanac:this.registro[index].fechanac, colegio:this.registro[index].colegio, ciudad:this.registro[index].ciudad}
-                //this.usercode = this.estudianteDatos.numident;
-            }
-            else {                
-                alert("No se encontro su registro.")
-                location.reload();
-            }
-            
-        },
 
         countDownChanged(dismissCountDown) {
             this.dismissCountDown = dismissCountDown
@@ -116,7 +81,7 @@ export default {
             this.mensaje.color = 'danger';
             this.mensaje.texto = 'Probando alerta';
             this.showAlert();
-        }       
+        }
                         
     },
   }
