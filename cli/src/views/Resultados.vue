@@ -97,7 +97,7 @@ footer {
   background: #0d6efd;
   }
 .accordion {
-  min-height: 351px;
+  min-height: 361px;
   font-family: Verdana, sans-serif;
   padding-left: 340px;
   width: 950px;

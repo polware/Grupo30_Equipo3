@@ -10,7 +10,7 @@
         <label for="email">Digita tu correo electrónico para buscar tu contraseña:</label><br><br>
         <input type="email" ref="emailtext" name="email" /><br><br>
         <b-button class="btn-success my-2 mx-2" @click.prevent="buscarEmail()" type="submit">Buscar</b-button>&nbsp;
-        <b-button class="btn-primary my-2 mx-2" type="submit">Cancelar</b-button>
+        <router-link to="/"><b-button class="btn-primary my-2 mx-2" >Regresar</b-button></router-link>
         <br>
         <br>
       </form>
