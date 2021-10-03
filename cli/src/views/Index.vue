@@ -6,7 +6,7 @@
         <div class="form-group" style="width: 80%;position: absolute;left: 10%;right: 10%; padding:30px; height: 465px">
           <input type="text" ref="usertext" style="display: block; width: 100%; bottom: 5px; border-radius: 60px; text-align: center" placeholder="Usuario" class="form-control form-control-lg"/>
           <br>
-          <input type="password" ref="passtext" style="display: block; width: 100%; border-radius: 60px; text-align: center;" placeholder="Contraseña" class="form-control form-control-lg"/>
+          <input type="password" ref="passtext" v-on:keyup.enter="BuscarUser" style="display: block; width: 100%; border-radius: 60px; text-align: center;" placeholder="Contraseña" class="form-control form-control-lg"/>
           <br>
           <b-button v-b-modal.modal-tall @click.prevent="BuscarUser()" variant="outline-primary" style="width:208px" type="submit">Ingresar</b-button>
                     <b-modal id="modal-tall" title="ERROR:" ok-only>
@@ -17,7 +17,7 @@
           <h6 style="font-size: 0.9em"><router-link to="/RecuperarCuenta">¿Olvidaste tu contraseña?</router-link></h6>
           <hr class="solid">
           <router-link to="/CrearCuenta" ><b-button variant="outline-success" style="width:208px">Crear Cuenta</b-button></router-link>
-        </div>        
+        </div>
       </div>        
     </section>
   </div>
