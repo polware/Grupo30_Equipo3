@@ -21,8 +21,7 @@
 export default {
     data() {
         return {
-            usuarioEmail:'',            
-            aviso:'',
+            usuarioEmail:'',
             registro:[],
             estudianteDatos: {},
             mensaje: {color: '', texto: ''},
@@ -51,11 +50,26 @@ export default {
             if (item.length > 0) {
                 const index = this.registro.findIndex(n => n.correo === aux);
                 this.estudianteDatos = {_id:this.registro[index]._id, numident:this.registro[index].numident, password:this.registro[index].password}
-                alert("La contraseña de su cuenta es: " +this.estudianteDatos.password)
+                this.$bvModal.msgBoxOk("La contraseña de su cuenta es: " +this.estudianteDatos.password, {
+                    title: 'Confirmación:',
+                    size: 'sm',
+                    buttonSize: 'sm',
+                    okVariant: 'success',
+                    headerClass: 'p-2 border-bottom-1',
+                    footerClass: 'p-2 border-top-1',
+                    centered: true
+                    })
             }
-            else {                
-                this.aviso = "El correo electrónico ingresado no existe en la base de datos.";
-                alert(this.aviso)
+            else {
+                  this.$bvModal.msgBoxOk('El correo electrónico ingresado no existe en la base de datos.', {
+                    title: 'ERROR:',
+                    size: 'sm',
+                    buttonSize: 'sm',
+                    okVariant: 'warning',
+                    headerClass: 'p-2 border-bottom-1',
+                    footerClass: 'p-2 border-top-1',
+                    centered: true
+                    })
             }
         },
 

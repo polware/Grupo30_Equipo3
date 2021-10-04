@@ -80,10 +80,16 @@ export default {
                 this.objEstudiante.fechanac='';
 		            this.objEstudiante.colegio='';
                 this.objEstudiante.ciudad='';
-                //Limpieza de los campos
-                this.mensaje.color='success';
-                this.mensaje.texto='¡Estudiante Registrado!'
-                this.showAlert()
+                this.$bvModal.msgBoxOk('¡Su cuenta ha sido creada!', {
+                    title: 'Confirmación:',
+                    size: 'sm',
+                    buttonSize: 'sm',
+                    okVariant: 'success',
+                    headerClass: 'p-2 border-bottom-1',
+                    footerClass: 'p-2 border-top-1',
+                    bodyBgVariant: 'light',
+                    centered: true
+                    })
             })
             .catch(e=>{
                 console.log(e.response);

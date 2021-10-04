@@ -64,9 +64,6 @@ export default {
             .then(res=>{
                 console.log(res)
                 this.$router.push('/ActualizarDatos')
-                this.mensaje.color='success';
-                this.mensaje.texto='¡Datos actualizados!'
-                this.showAlert()
                 this.estudianteEditar.numident='';
                 this.estudianteEditar.password='';
                 this.estudianteEditar.nombre='';                
@@ -75,6 +72,15 @@ export default {
                 this.estudianteEditar.fechanac='';
 		        this.estudianteEditar.colegio='';
                 this.estudianteEditar.ciudad='';
+                this.$bvModal.msgBoxOk('¡Sus datos han sido actualizados!', {
+                    title: 'Confirmación:',
+                    size: 'sm',
+                    buttonSize: 'sm',
+                    okVariant: 'success',
+                    headerClass: 'p-2 border-bottom-1',
+                    footerClass: 'p-2 border-top-1',
+                    centered: true
+                    })
             })
             .catch(error => {
                 console.log(error)

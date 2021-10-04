@@ -62,10 +62,15 @@ export default {
                 this.objContacto.correo='';
                 this.objContacto.institucion='';
                 this.objContacto.mensaje='';
-                //Limpieza de los campos
-                this.mensaje.color='success';
-                this.mensaje.texto='¡Sus datos han sido registrados!'
-                this.showAlert()
+                this.$bvModal.msgBoxOk('¡Sus datos han sido registrados!', {
+                    title: 'Confirmación:',
+                    size: 'sm',
+                    buttonSize: 'sm',
+                    okVariant: 'success',
+                    headerClass: 'p-2 border-bottom-1',
+                    footerClass: 'p-2 border-top-1',
+                    centered: true
+                    })
             })
             .catch(e=>{
                 console.log(e.response);

@@ -72,7 +72,10 @@
                     </b-col>
                 </b-row>
                 <br>
+                    <!--
                     <b-button @click.prevent="borrarPerfil(estudianteBorrar._id)" class="btn-danger my-2 mx-2" type="submit">Eliminar</b-button>&nbsp;
+                    -->
+                    <b-button @click.prevent="confirmacion" class="btn-danger my-2 mx-2" type="submit">Eliminar</b-button>&nbsp;
                     <router-link :to="{name: 'Profile', params: {id:estudianteBorrar._id} }" class="btn btn-secondary">Cancelar</router-link>
                 <br>
 	          </b-container>
@@ -89,6 +92,7 @@ export default {
     data() {
         return {
             estudianteBorrar:[],
+            opcion: '',
             mensaje: {color: '', texto: ''},
             dismissSecs: 5,
             dismissCountDown: 0
@@ -106,25 +110,54 @@ export default {
 
     methods: {
 
-        borrarPerfil(id){            
-                if (window.confirm("¿Está seguro que desea borrar la cuenta?")) {
-                    this.axios.delete(`/estudiante/${id}`)
-                    .then(() => {
-                        this.mensaje.color = 'danger';
-                        this.mensaje.texto = '¡Su cuenta ha sido eliminada!';
-                        this.showAlert();
-			            this.estudianteBorrar.numident='';
-                        this.estudianteBorrar.password='';
-                        this.estudianteBorrar.nombre='';                
-                        this.estudianteBorrar.apellido='';
-                        this.estudianteBorrar.correo='';
-                        this.estudianteBorrar.fechanac='';
-                        this.estudianteBorrar.colegio='';
-                        this.estudianteBorrar.ciudad='';
+        confirmacion(){                
+                this.opcion = '';
+                this.$bvModal.msgBoxConfirm('¿Está seguro que desea borrar la cuenta?', {
+                title: 'Por favor confirme:',
+                size: 'sm',
+                buttonSize: 'sm',
+                okVariant: 'danger',
+                okTitle: 'Si',
+                cancelTitle: 'No',
+                footerClass: 'p-2',
+                hideHeaderClose: false,
+                centered: true
+                })
+                .then(value => {
+                        this.opcion = value;
+                        if(this.opcion){
+                            this.borrarPerfil(this.estudianteBorrar._id);
+                        }
+                })
+                .catch(err => {
+                        console.log(error)
+                })
+        },
+
+        borrarPerfil(id){
+                this.axios.delete(`/estudiante/${id}`)
+                .then(() => {
+			        this.estudianteBorrar.numident='';
+                    this.estudianteBorrar.password='';
+                    this.estudianteBorrar.nombre='';                
+                    this.estudianteBorrar.apellido='';
+                    this.estudianteBorrar.correo='';
+                    this.estudianteBorrar.fechanac='';
+                    this.estudianteBorrar.colegio='';
+                    this.estudianteBorrar.ciudad='';
+                    this.$bvModal.msgBoxOk('¡Su cuenta ha sido eliminada!', {
+                        title: 'Eliminación de cuenta',
+                        size: 'sm',
+                        buttonSize: 'sm',
+                        okVariant: 'success',
+                        headerClass: 'p-2 border-bottom-1',
+                        footerClass: 'p-2 border-top-1',
+                        headerBgVariant: 'warning',
+                        centered: true
+                        })
                     }).catch(error => {
                         console.log(error)
-                        })
-                }
+                    })
         },
 
         countDownChanged(dismissCountDown) {

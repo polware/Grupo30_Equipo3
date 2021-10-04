@@ -9,7 +9,7 @@
           <input type="password" ref="passtext" v-on:keyup.enter="BuscarUser" style="display: block; width: 100%; border-radius: 60px; text-align: center;" placeholder="Contraseña" class="form-control form-control-lg"/>
           <br>
           <b-button v-b-modal.modal-tall @click.prevent="BuscarUser()" variant="outline-primary" style="width:208px" type="submit">Ingresar</b-button>
-                    <b-modal id="modal-tall" title="ERROR:" ok-only>
+                    <b-modal id="modal-tall" title="ERROR:" ok-only centered>
                         <p class="pre-formatted">{{aviso}}</p>
                     </b-modal>
           <br>
@@ -129,7 +129,7 @@ footer {
 }
 .modal-footer{
     background-color: #ffffff;
-    min-height: 15%;
+    min-height: 10%;
 }
 .pre-formatted {
   white-space: pre;
