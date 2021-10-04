@@ -116,11 +116,13 @@ export default {
                 title: 'Por favor confirme:',
                 size: 'sm',
                 buttonSize: 'sm',
-                okVariant: 'danger',
+                okVariant: 'primary',
                 okTitle: 'Si',
                 cancelTitle: 'No',
                 footerClass: 'p-2',
-                hideHeaderClose: false,
+                headerBgVariant: 'primary',
+                headerTextVariant: 'light',
+                hideHeaderClose: true,
                 centered: true
                 })
                 .then(value => {
@@ -149,10 +151,11 @@ export default {
                         title: 'Eliminación de cuenta',
                         size: 'sm',
                         buttonSize: 'sm',
-                        okVariant: 'success',
+                        okVariant: 'danger',
                         headerClass: 'p-2 border-bottom-1',
                         footerClass: 'p-2 border-top-1',
-                        headerBgVariant: 'warning',
+                        headerBgVariant: 'danger',
+                        headerTextVariant: 'light',
                         centered: true
                         })
                     }).catch(error => {

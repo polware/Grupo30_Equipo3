@@ -57,6 +57,8 @@ export default {
                     okVariant: 'success',
                     headerClass: 'p-2 border-bottom-1',
                     footerClass: 'p-2 border-top-1',
+                    headerBgVariant: 'success',
+                    headerTextVariant: 'light',
                     centered: true
                     })
             }
@@ -65,9 +67,12 @@ export default {
                     title: 'ERROR:',
                     size: 'sm',
                     buttonSize: 'sm',
-                    okVariant: 'warning',
+                    okVariant: 'danger',
                     headerClass: 'p-2 border-bottom-1',
                     footerClass: 'p-2 border-top-1',
+                    headerBgVariant: 'danger',
+                    headerTextVariant: 'light',
+                    footerTextVariant: 'light',
                     centered: true
                     })
             }

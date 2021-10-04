@@ -84,10 +84,13 @@ export default {
                     title: 'Confirmación:',
                     size: 'sm',
                     buttonSize: 'sm',
-                    okVariant: 'success',
+                    okVariant: 'secondary',
                     headerClass: 'p-2 border-bottom-1',
                     footerClass: 'p-2 border-top-1',
+                    headerBgVariant: 'secondary',
+                    headerTextVariant: 'light',
                     bodyBgVariant: 'light',
+                    footerBgVariant: 'light',
                     centered: true
                     })
             })

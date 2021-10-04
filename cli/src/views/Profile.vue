@@ -61,6 +61,17 @@ export default {
         let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.id}`;
         axios.get(apiURL).then((res) => {
                 this.estudianteDatos = res.data
+                this.$bvModal.msgBoxOk('Hola ' +this.estudianteDatos.nombre +'.\nBienvenid@ a su página de Perfil.', {
+                    title: 'Bienvenida',
+                    size: 'sm',
+                    buttonSize: 'sm',
+                    okVariant: 'primary',
+                    headerClass: 'p-2 border-bottom-1',
+                    footerClass: 'p-2 border-top-1',
+                    headerBgVariant: 'primary',
+                    headerTextVariant: 'light',
+                    centered: true
+                    })
             })
             .catch(e=>{
                 console.log(e.response)

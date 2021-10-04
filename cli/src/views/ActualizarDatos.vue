@@ -79,6 +79,8 @@ export default {
                     okVariant: 'success',
                     headerClass: 'p-2 border-bottom-1',
                     footerClass: 'p-2 border-top-1',
+                    headerBgVariant: 'success',
+                    headerTextVariant: 'light',
                     centered: true
                     })
             })

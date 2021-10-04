@@ -8,10 +8,7 @@
           <br>
           <input type="password" ref="passtext" v-on:keyup.enter="BuscarUser" style="display: block; width: 100%; border-radius: 60px; text-align: center;" placeholder="Contraseña" class="form-control form-control-lg"/>
           <br>
-          <b-button v-b-modal.modal-tall @click.prevent="BuscarUser()" variant="outline-primary" style="width:208px" type="submit">Ingresar</b-button>
-                    <b-modal id="modal-tall" title="ERROR:" ok-only centered>
-                        <p class="pre-formatted">{{aviso}}</p>
-                    </b-modal>
+          <router-link to="/CrearCuenta"><b-button @click.prevent="BuscarUser()" variant="outline-primary" style="width:208px" type="submit">Ingresar</b-button></router-link>
           <br>
           <br>
           <h6 style="font-size: 0.9em"><router-link to="/RecuperarCuenta">¿Olvidaste tu contraseña?</router-link></h6>
@@ -28,7 +25,6 @@ export default {
         return {
             usuarioID:'',
             usuarioPASS:'',
-            aviso:'',
             registro:[],
             estudianteDatos: {},
             mensaje: {color: '', texto: ''},
@@ -53,11 +49,20 @@ export default {
             this.usuarioPASS = this.$refs.passtext.value;
             const cod = this.usuarioID;
             const pass = this.usuarioPASS;
-            if(this.estudianteDatos.numident === cod && this.estudianteDatos.password === pass){                
+            if(this.estudianteDatos.numident === cod && this.estudianteDatos.password === pass){
                 this.$router.push({name: 'Profile', params: {id:this.estudianteDatos._id} })
             }
-            else {                
-                this.aviso = "Por favor verifique los datos, uno de ellos no coincide.";
+            else {
+                this.$bvModal.msgBoxOk('Por favor verifique los datos, uno de ellos no coincide.', {
+                    title: 'Error:',
+                    size: 'sm',
+                    buttonSize: 'sm',
+                    okVariant: 'warning',
+                    headerClass: 'p-2 border-bottom-1',
+                    footerClass: 'p-2 border-top-1',
+                    headerBgVariant: 'warning',
+                    centered: true
+                    })
             }
         },
 
@@ -69,11 +74,21 @@ export default {
             item = this.registro.filter(i => i.numident === aux);
             if (item.length > 0) {
                 const index = this.registro.findIndex(n => n.numident === aux);
-                this.estudianteDatos = {_id:this.registro[index]._id, numident:this.registro[index].numident, password:this.registro[index].password}
+                this.estudianteDatos = {_id:this.registro[index]._id, numident:this.registro[index].numident, password:this.registro[index].password, nombre:this.registro[index].nombre}
                 this.validando();
             }
-            else {                
-                this.aviso = "No se encontró su registro.\nPor favor verifique los datos ingresados.";
+            else {
+                this.$bvModal.msgBoxOk('No se encontró su registro. \nPor favor verifique los datos ingresados.', {
+                    title: 'Error:',
+                    size: 'sm',
+                    buttonSize: 'sm',
+                    okVariant: 'danger',
+                    headerClass: 'p-2 border-bottom-1',
+                    footerClass: 'p-2 border-top-1',
+                    headerBgVariant: 'danger',
+                    headerTextVariant: 'light',
+                    centered: true
+                    })
             }
         },
 
@@ -130,8 +145,5 @@ footer {
 .modal-footer{
     background-color: #ffffff;
     min-height: 10%;
-}
-.pre-formatted {
-  white-space: pre;
 }
 </style>
