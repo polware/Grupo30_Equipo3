@@ -16,7 +16,7 @@
             <h2>Crear Cuenta</h2>
             <br>
           </div>
-          <form class="row g-3" @submit.prevent="agregarEstud()">
+          <form class="row g-3" @submit.prevent="guardar()">
             <div class="col-md-6">
               <input type="text" class="form-control casilla" placeholder="Nombre(s)" v-model="objEstudiante.nombre">
             </div>
@@ -49,7 +49,9 @@ export default {
     data() {
         return {
             estudiantes:[],
+	    resultados:[],
             objEstudiante:{numident:'', password:'', nombre:'', apellido:'', correo:'', fechanac:'', colegio:'', ciudad:''},
+            objResultado:{numident:'', estado:'', letraintereses:'', puntajeintereses:'', ramasugerint:'', letraaptitudes:'', puntajeaptitudes:'', ramasugerapt:''},
             mensaje: {color: '', texto: ''},
             dismissSecs: 5,
             dismissCountDown: 0
@@ -65,9 +67,27 @@ export default {
                 console.log(e.response)
             })
     },
+	
+    beforeMount() {
+        this.axios.get('/resultado')
+                .then(res=>{                    
+                    console.log(res.data)
+                    this.resultados = res.data                    
+                })
+                .catch(e=>{
+                    console.log(e.response)
+                })
+    },
 
     methods: {
         
+        guardar(){
+            var text = '';
+            this.objResultado = {numident:this.objEstudiante.numident, estado:text, letraintereses:text, puntajeintereses:text, ramasugerint:text, letraaptitudes:text, puntajeaptitudes:text, ramasugerapt:text};
+            this.agregarEstud();
+            this.agregarEstResultado();
+        },
+
         agregarEstud(){
             this.axios.post('/nuevo-estudiante', this.objEstudiante)
             .then(res=>{
@@ -105,6 +125,23 @@ export default {
                 this.showAlert()
             })
         },        
+
+        agregarEstResultado(){
+            this.axios.post('/nuevo-resultado', this.objResultado)
+            .then(res=>{
+                this.resultados.push(res.data)                
+            })
+            .catch(e=>{
+                console.log(e.response);
+                if(e.response.data.error.errors.nombre.message){
+                    this.mensaje.texto = e.response.data.error.errors.nombre.message
+                } else{
+                    this.mensaje.texto = '¡Error del Sistema!';
+                }
+                this.mensaje.color = 'danger';
+                this.showAlert()
+            })
+        },
 
         countDownChanged(dismissCountDown) {
             this.dismissCountDown = dismissCountDown
