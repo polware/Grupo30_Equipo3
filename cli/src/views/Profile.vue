@@ -19,10 +19,10 @@
           <b-container class="bv-example-row">
             <b-row>
               <b-col sm><img src="../img/img_profile.jpg" alt="Perfil" width="150" height="150"></b-col>              
-              <b-col sm><img src="../img/Update.png" alt="Perfil" width="150" height="150"></b-col>
-              <b-col sm><img src="../img/Delete.png" alt="Perfil" width="150" height="150"></b-col>
-              <b-col sm><img src="../img/Test.png" alt="Perfil" width="150" height="150"></b-col>
-              <b-col sm><img src="../img/View_Results.png" alt="Perfil" width="150" height="150"></b-col>
+              <b-col sm><img src="../img/Update.jpg" alt="Actualizar" width="180" height="180"></b-col>
+              <b-col sm><img src="../img/Delete.png" alt="Borrar" width="150" height="150"></b-col>
+              <b-col sm><img src="../img/Test.png" alt="Test" width="150" height="150"></b-col>
+              <b-col sm><img src="../img/View_Results.png" alt="Resultados" width="150" height="150"></b-col>
             </b-row>
             <b-row>
               <b-col sm>ID de estudiante:</b-col>
@@ -35,7 +35,7 @@
               <b-col sm><br><input type="text" class="form-control" v-model="estudianteDatos.numident" disabled></b-col>
               <b-col sm><br><router-link :to="{name: 'ActualizarDatos', params: {id:estudianteDatos._id} }" class="btn btn-primary">Actualizar Datos</router-link></b-col>
               <b-col sm><br><router-link :to="{name: 'BorrarPerfil', params: {id:estudianteDatos._id} }" class="btn btn-primary">Eliminar Perfil</router-link></b-col>
-              <b-col sm><br><router-link :to="{name: 'Test', params: {id:estudianteDatos._id} }" class="btn btn-primary">Realizar Test</router-link></b-col>
+              <b-col sm><br><router-link :to="{name: 'IntroTest', params: {id:estudianteDatos._id} }" class="btn btn-primary">Realizar Test</router-link></b-col>
               <b-col sm><br><router-link :to="{name: 'Resultados', params: {id:estudianteDatos._id} }" class="btn btn-primary">Ver Resultados</router-link></b-col>              
             </b-row>
           </b-container>              
@@ -99,7 +99,7 @@ export default {
 </script>
 <style lang="scss">
 .section {
-  min-height: 527px;
+  min-height: 517px;
   font-family: Verdana, sans-serif;
   background: #fff;  
   overflow: auto;
