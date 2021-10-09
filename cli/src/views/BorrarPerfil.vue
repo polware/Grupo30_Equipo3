@@ -72,11 +72,8 @@
                     </b-col>
                 </b-row>
                 <br>
-                    <!--
-                    <b-button @click.prevent="borrarPerfil(estudianteBorrar._id)" class="btn-danger my-2 mx-2" type="submit">Eliminar</b-button>&nbsp;
-                    -->
                     <b-button @click.prevent="confirmacion" class="btn-danger my-2 mx-2" type="submit">Eliminar</b-button>&nbsp;
-                    <router-link :to="{name: 'Profile', params: {id:estudianteBorrar._id} }" class="btn btn-secondary">Cancelar</router-link>
+                    <b-button @click.prevent="ruta" class="btn-secondary my-2 mx-2" type="submit">Cancelar</b-button>
                 <br>
 	          </b-container>
             </form>
@@ -91,17 +88,20 @@ import axios from "axios";
 export default {    
     data() {
         return {
-            estudianteBorrar:[],
+            estudianteBorrar:{},
+            ID:'',
+            eliminado:false,
             opcion: '',
             mensaje: {color: '', texto: ''},
             dismissSecs: 5,
             dismissCountDown: 0
         }
     },
-    created() {        
-        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.id}`;
+    created() {
+        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.numident}`;
         axios.get(apiURL).then((res) => {
                 this.estudianteBorrar = res.data
+                this.ID = this.estudianteBorrar.numident;
             })
             .catch(e=>{
                 console.log(e.response)
@@ -109,6 +109,16 @@ export default {
     },
 
     methods: {
+
+        ruta(){
+            if(this.eliminado){
+                this.$router.push('/')
+            }
+            else{
+                this.$router.push({name: 'Profile', params: {numident:this.ID} })
+            }
+            
+        },
 
         confirmacion(){                
                 this.opcion = '';
@@ -131,7 +141,7 @@ export default {
                             this.borrarPerfil(this.estudianteBorrar._id);
                         }
                 })
-                .catch(err => {
+                .catch(error => {
                         console.log(error)
                 })
         },
@@ -147,6 +157,7 @@ export default {
                     this.estudianteBorrar.fechanac='';
                     this.estudianteBorrar.colegio='';
                     this.estudianteBorrar.ciudad='';
+                    this.eliminado = true;
                     this.$bvModal.msgBoxOk('¡Su cuenta ha sido eliminada!', {
                         title: 'Eliminación de cuenta',
                         size: 'sm',

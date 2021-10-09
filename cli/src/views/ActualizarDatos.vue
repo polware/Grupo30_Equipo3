@@ -21,8 +21,8 @@
                 <input type="text" class="form-control-casilla" id="apellido_actualizar" size="40" value="Escribe tu(s) Apellido(s)" v-model="estudianteEditar.apellido" required><br><br>    
                 <label for="correo_actualizar">Nuevo Correo Electrónico:</label>
                 <input type="email" class="form-control-casilla" id="correo_actualizar" size="35" value="Escribe nuevo correo electrónico" v-model="estudianteEditar.correo" required>&nbsp;
-                <label for="contrasena_actualizar">Nueva Contraseña:</label>
-                <input type="password" class="form-control-casilla" id="contrasena_actualizar" size="35" value="Escribe nueva contraseña" v-model="estudianteEditar.password" required><br><br>    
+                <label for="contrasena_actualizar">Contraseña:</label>
+                <input type="password" class="form-control-casilla" id="contrasena_actualizar" size="35" value="Escribe nueva contraseña" v-model="estudianteEditar.password" required disabled><br><br>
                 <label for="nacimientos_actualizar">Fecha de Nacimiento:</label>
                 <input type="date" class="form-control-casilla" id="nacimientos_actualizar" size="20" v-model="estudianteEditar.fechanac" required>&nbsp;
                 <label for="ciudad_actualizar">Ciudad:</label>
@@ -30,7 +30,7 @@
                 <label for="institucion_actualizar">Colegio/Institución:</label>
                 <input type="text" class="form-control-casilla" id="institucion_actualizar" size="20" v-model="estudianteEditar.colegio" required><br><br>
                 <b-button class="btn-warning my-2 mx-2" type="submit">Guardar</b-button>
-                <router-link :to="{name: 'Profile', params: {id:estudianteEditar._id} }" class="btn btn-secondary">Cancelar</router-link>
+                <router-link :to="{name: 'Profile', params: {numident:estudianteEditar.numident} }" class="btn btn-secondary">Cancelar</router-link>
             </form>
         </div>
     </section>
@@ -47,8 +47,8 @@ export default {
             dismissCountDown: 0
         }
     },
-    created() {        
-        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.id}`;
+    created() {
+        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.numident}`;
         axios.get(apiURL).then((res) => {
                 this.estudianteEditar = res.data
             })

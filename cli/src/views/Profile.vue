@@ -33,12 +33,12 @@
             </b-row>
             <b-row>
               <b-col sm><br><input type="text" class="form-control" v-model="estudianteDatos.numident" disabled></b-col>
-              <b-col sm><br><router-link :to="{name: 'ActualizarDatos', params: {id:estudianteDatos._id} }" class="btn btn-primary">Actualizar Datos</router-link></b-col>
-              <b-col sm><br><router-link :to="{name: 'BorrarPerfil', params: {id:estudianteDatos._id} }" class="btn btn-primary">Eliminar Perfil</router-link></b-col>
-              <b-col sm><br><router-link :to="{name: 'IntroTest', params: {id:estudianteDatos._id} }" class="btn btn-primary">Realizar Test</router-link></b-col>
-              <b-col sm><br><router-link :to="{name: 'Resultados', params: {id:estudianteDatos._id} }" class="btn btn-primary">Ver Resultados</router-link></b-col>              
+              <b-col sm><br><router-link :to="{name: 'ActualizarDatos', params: {numident:estudianteDatos.numident} }" class="btn btn-primary">Actualizar Datos</router-link></b-col>
+              <b-col sm><br><router-link :to="{name: 'BorrarPerfil', params: {numident:estudianteDatos.numident} }" class="btn btn-primary">Eliminar Perfil</router-link></b-col>
+              <b-col sm><br><router-link :to="{name: 'Test', params: {numident:estudianteDatos.numident} }" class="btn btn-primary">Realizar Test</router-link></b-col>
+              <b-col sm><br><router-link :to="{name: 'Resultados', params: {numident:estudianteDatos.numident} }" class="btn btn-primary">Ver Resultados</router-link></b-col>              
             </b-row>
-          </b-container>              
+          </b-container>
       </div>
       </form>
   </div>  
@@ -58,7 +58,7 @@ export default {
         }
     },
     created() {
-        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.id}`;
+        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.numident}`;
         axios.get(apiURL).then((res) => {
                 this.estudianteDatos = res.data
                 this.$bvModal.msgBoxOk('Hola ' +this.estudianteDatos.nombre +'.\nBienvenid@ a su página de Perfil.', {

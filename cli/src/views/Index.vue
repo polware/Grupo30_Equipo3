@@ -1,15 +1,24 @@
 <template>
   <div class="index">
+    <b-alert
+        :show="dismissCountDown"
+        dismissible
+        :variant="mensaje.color"
+        @dismissed="dismissCountDown=0"
+        @dismiss-count-down="countDownChanged">
+        {{mensaje.texto}}
+        </b-alert>
     <section>
-      <div class="form-group" style="width: 40%; height: 70%; position: relative; top: 25%; left: 50%; margin: -100px 0 0 -100px; box-sizing: border-box; box-shadow: -1px 0px 20px 6px #999; height: 460px; background-color:#e6e6e6">
+      <div class="form-group" style="width: 40%; height: 75%; position: relative; top: 25%; left: 50%; margin: -100px 0 0 -100px; box-sizing: border-box; box-shadow: -1px 0px 20px 6px #999; height: 460px; background-color:#e6e6e6">
         <h2 style="font-weight: 700!important; margin-bottom: 0!important; font-size: calc(1.325rem + .9vw); padding:30px">Inicia Sesión</h2>
         <div class="form-group" style="width: 80%;position: absolute;left: 10%;right: 10%; padding:30px; height: 465px">
-          <input type="text" ref="usertext" style="display: block; width: 100%; bottom: 5px; border-radius: 60px; text-align: center" placeholder="Usuario" class="form-control form-control-lg"/>
+          <form @submit.prevent="loginEstudiante(validacionEstudiante)">
+          <input type="text" style="display: block; width: 100%; bottom: 5px; border-radius: 60px; text-align: center" placeholder="Usuario" class="form-control form-control-lg" v-model="validacionEstudiante.numident"/>
           <br>
-          <input type="password" ref="passtext" v-on:keyup.enter="BuscarUser" style="display: block; width: 100%; border-radius: 60px; text-align: center;" placeholder="Contraseña" class="form-control form-control-lg"/>
+          <input type="password" style="display: block; width: 100%; border-radius: 60px; text-align: center;" placeholder="Contraseña" class="form-control form-control-lg" v-model="validacionEstudiante.password"/>
           <br>
-          <router-link to="/CrearCuenta"><b-button @click.prevent="BuscarUser()" variant="outline-primary" style="width:208px" type="submit">Ingresar</b-button></router-link>
-          <br>
+          <b-button type="submit" variant="outline-primary" style="width:208px">Ingresar</b-button>
+          </form>
           <br>
           <h6 style="font-size: 0.9em"><router-link to="/RecuperarCuenta">¿Olvidaste tu contraseña?</router-link></h6>
           <hr class="solid">
@@ -23,10 +32,9 @@
 export default {
     data() {
         return {
-            usuarioID:'',
-            usuarioPASS:'',
             registro:[],
             estudianteDatos: {},
+            validacionEstudiante:{},
             mensaje: {color: '', texto: ''},
             dismissSecs: 5,
             dismissCountDown: 0,
@@ -44,54 +52,35 @@ export default {
     
     methods: {
 
-        validando(){
-            this.usuarioID = this.$refs.usertext.value;
-            this.usuarioPASS = this.$refs.passtext.value;
-            const cod = this.usuarioID;
-            const pass = this.usuarioPASS;
-            if(this.estudianteDatos.numident === cod && this.estudianteDatos.password === pass){
-                this.$router.push({name: 'Profile', params: {id:this.estudianteDatos._id} })
+        loginEstudiante(validacionEstudiante){
+          if(validacionEstudiante.numident === undefined || validacionEstudiante.password === undefined){
+              this.mensaje.texto = 'Por favor llene todos los campos.';
+              this.mensaje.color = 'danger';
+              this.showAlert();
+              return 
+          }
+          const data = {
+            "numident" : validacionEstudiante.numident,
+            "password" : validacionEstudiante.password
+          } 
+          this.axios.post('/login', data)
+          .then(res=>{
+             if(res.request.status == 200){
+              this.$router.push({name: 'Profile', params: {numident:validacionEstudiante.numident} })
+             }
+          }).catch(e=>{
+            console.log(e.response);
+            if(e.response.request.status == 400){
+              this.mensaje.texto = e.response.data.mensaje
             }
-            else {
-                this.$bvModal.msgBoxOk('Por favor verifique los datos, uno de ellos no coincide.', {
-                    title: 'Error:',
-                    size: 'sm',
-                    buttonSize: 'sm',
-                    okVariant: 'warning',
-                    headerClass: 'p-2 border-bottom-1',
-                    footerClass: 'p-2 border-top-1',
-                    headerBgVariant: 'warning',
-                    centered: true
-                    })
+            else{
+              this.mensaje.texto = '¡Sus datos no existen en la base de datos!';
             }
+            this.mensaje.color = 'danger';
+            this.showAlert()
+            })      
         },
-
-        BuscarUser(){
-            this.usuarioID = this.$refs.usertext.value;
-            const aux = this.usuarioID;
-            var item;
-            this.item = []
-            item = this.registro.filter(i => i.numident === aux);
-            if (item.length > 0) {
-                const index = this.registro.findIndex(n => n.numident === aux);
-                this.estudianteDatos = {_id:this.registro[index]._id, numident:this.registro[index].numident, password:this.registro[index].password, nombre:this.registro[index].nombre}
-                this.validando();
-            }
-            else {
-                this.$bvModal.msgBoxOk('No se encontró su registro. \nPor favor verifique los datos ingresados.', {
-                    title: 'Error:',
-                    size: 'sm',
-                    buttonSize: 'sm',
-                    okVariant: 'danger',
-                    headerClass: 'p-2 border-bottom-1',
-                    footerClass: 'p-2 border-top-1',
-                    headerBgVariant: 'danger',
-                    headerTextVariant: 'light',
-                    centered: true
-                    })
-            }
-        },
-
+        
         countDownChanged(dismissCountDown) {
             this.dismissCountDown = dismissCountDown
         },

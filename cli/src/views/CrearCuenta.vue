@@ -51,7 +51,7 @@ export default {
             estudiantes:[],
 	    resultados:[],
             objEstudiante:{numident:'', password:'', nombre:'', apellido:'', correo:'', fechanac:'', colegio:'', ciudad:''},
-            objResultado:{numident:'', estado:'', letraintereses:'', puntajeintereses:'', ramasugerint:'', letraaptitudes:'', puntajeaptitudes:'', ramasugerapt:''},
+            objResultado:{numident:'', estado:'', letraintereses:'', puntajeintereses:'', ramasugerint:'', letraaptitudes:'', puntajeaptitudes:'', ramasugerapt:'', preafirm:''},
             mensaje: {color: '', texto: ''},
             dismissSecs: 5,
             dismissCountDown: 0
@@ -83,7 +83,7 @@ export default {
         
         guardar(){
             var text = '';
-            this.objResultado = {numident:this.objEstudiante.numident, estado:text, letraintereses:text, puntajeintereses:text, ramasugerint:text, letraaptitudes:text, puntajeaptitudes:text, ramasugerapt:text};
+            this.objResultado = {numident:this.objEstudiante.numident, estado:text, letraintereses:text, puntajeintereses:text, ramasugerint:text, letraaptitudes:text, puntajeaptitudes:text, ramasugerapt:text, preafirm:text};
             this.agregarEstud();
             this.agregarEstResultado();
         },
