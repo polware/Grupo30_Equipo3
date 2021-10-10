@@ -1,6 +1,5 @@
 <template>
-<div class="resultados">    
-      <section>
+<div class="resultados">
         <b-alert
         :show="dismissCountDown"
         dismissible
@@ -9,7 +8,7 @@
         @dismiss-count-down="countDownChanged">
         {{mensaje.texto}}
         </b-alert>
-        <br>      
+        <br>
         <h2>Resultados del Test</h2>
         <hr>
         <table class="table table-hover table-striped table-responsive">
@@ -59,7 +58,6 @@
           <br>
           <router-link :to="{name: 'Profile', params: {numident:resultados.numident} }" class="btn btn-secondary">Regresar</router-link>
           <br>
-      </section>    
 </div>
 </template>
 <script>
@@ -69,7 +67,7 @@ export default {
         return {
             opcion: '',
             activarepetir: false,
-            resultados:[],            
+            resultados:[],
             resultadoEditar: {},
             mensaje: {color: '', texto: ''},
             dismissSecs: 5,
@@ -171,6 +169,23 @@ export default {
 }
 </script>
 <style lang="scss">
+.table{
+    table-layout: fixed;
+    max-width: 1000px;
+}
+.table > tbody > tr > td {
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+.resultados{
+    font-family: Verdana, sans-serif;
+    overflow: auto;
+    height: 517px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 footer {
   font-family: Verdana, sans-serif;
   color: #fff;
@@ -182,7 +197,7 @@ footer {
 section {
   height: 517px;
   overflow: auto;
-  padding-top: 11%;
+  padding-top: 20%;
   padding-left: 15%;
   padding-right: 15%;
   font-family: Verdana, sans-serif;

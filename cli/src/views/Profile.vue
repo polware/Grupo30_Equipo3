@@ -99,7 +99,7 @@ export default {
 </script>
 <style lang="scss">
 .section {
-  min-height: 517px;
+  min-height: 527px;
   font-family: Verdana, sans-serif;
   background: #fff;  
   overflow: auto;

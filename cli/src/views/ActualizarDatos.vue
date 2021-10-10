@@ -22,7 +22,7 @@
                 <label for="correo_actualizar">Nuevo Correo Electrónico:</label>
                 <input type="email" class="form-control-casilla" id="correo_actualizar" size="35" value="Escribe nuevo correo electrónico" v-model="estudianteEditar.correo" required>&nbsp;
                 <label for="contrasena_actualizar">Contraseña:</label>
-                <input type="password" class="form-control-casilla" id="contrasena_actualizar" size="35" value="Escribe nueva contraseña" v-model="estudianteEditar.password" required disabled><br><br>
+                <input type="password" class="form-control-casilla" id="password" size="35" value="Escriba contraseña nueva" v-model="estudianteEditar.password" required><br><br>
                 <label for="nacimientos_actualizar">Fecha de Nacimiento:</label>
                 <input type="date" class="form-control-casilla" id="nacimientos_actualizar" size="20" v-model="estudianteEditar.fechanac" required>&nbsp;
                 <label for="ciudad_actualizar">Ciudad:</label>
@@ -38,6 +38,7 @@
 </template>
 <script>
 import axios from "axios";
+import bcrypt from 'bcryptjs';
 export default {
     data() {
         return {
@@ -60,6 +61,10 @@ export default {
     methods: {   
         
         manejarDatos(registro) {
+            var password = this.estudianteEditar.password;
+            const salt = bcrypt.genSaltSync(10)
+            const hash = bcrypt.hashSync(password, salt)
+            this.estudianteEditar.password = hash;
             this.axios.put(`/estudiante/${registro._id}`, registro)
             .then(res=>{
                 console.log(res)
