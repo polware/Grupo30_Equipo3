@@ -36,6 +36,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "crearcuenta" */ '../views/CrearCuenta.vue')
   },
   {
+    path: '/nuevopassword',
+    name: 'NuevoPassword',
+    component: () => import(/* webpackChunkName: "nuevopassword" */ '../views/NuevoPassword.vue')
+  },
+  {
     path: '/test',
     name: 'Test',
     component: () => import(/* webpackChunkName: "test" */ '../views/Test.vue')
@@ -53,7 +58,12 @@ const routes = [
   {
     path: '/resultados',
     name: 'Resultados',
-    component: () => import(/* webpackChunkName: "borrarperfil" */ '../views/Resultados.vue')
+    component: () => import(/* webpackChunkName: "resultados" */ '../views/Resultados.vue')
+  },
+  {
+    path: '/estudiante',
+    name: 'Estudiante',
+    component: () => import(/* webpackChunkName: "estudiante" */ '../views/Estudiante.vue')
   }
 ]
 

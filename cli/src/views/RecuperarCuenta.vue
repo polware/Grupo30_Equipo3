@@ -1,19 +1,16 @@
 <template>
   <div class="recuperar">
-    <div class="container"> 
+    <div class="container">
       <br>
-      <form class="form-recup">
-        <br>
-        <br>
+      <b-card bg-variant="light">
         <h2>Recuperar Contraseña</h2>
         <hr>
-        <label for="email">Digita tu correo electrónico para buscar tu contraseña:</label><br><br>
+        <label for="email">Digite su correo electrónico para crear una nueva contraseña:</label><br><br>
         <input type="email" ref="emailtext" name="email" /><br><br>
         <b-button class="btn-success my-2 mx-2" @click.prevent="buscarEmail()" type="submit">Buscar</b-button>&nbsp;
         <router-link to="/"><b-button class="btn-primary my-2 mx-2" >Regresar</b-button></router-link>
         <br>
-        <br>
-      </form>
+      </b-card>
     </div>
 </div>
 </template>
@@ -46,21 +43,11 @@ export default {
             const aux = this.usuarioEmail;
             var item;
             this.item = []
-            item = this.registro.filter(i => i.correo === aux);            
+            item = this.registro.filter(i => i.correo === aux);
             if (item.length > 0) {
                 const index = this.registro.findIndex(n => n.correo === aux);
                 this.estudianteDatos = {_id:this.registro[index]._id, numident:this.registro[index].numident, password:this.registro[index].password}
-                this.$bvModal.msgBoxOk("La contraseña de su cuenta es: " +this.estudianteDatos.password, {
-                    title: 'Confirmación:',
-                    size: 'sm',
-                    buttonSize: 'sm',
-                    okVariant: 'success',
-                    headerClass: 'p-2 border-bottom-1',
-                    footerClass: 'p-2 border-top-1',
-                    headerBgVariant: 'success',
-                    headerTextVariant: 'light',
-                    centered: true
-                    })
+                this.$router.push({name: 'NuevoPassword', params: {numident:this.estudianteDatos.numident} })                
             }
             else {
                   this.$bvModal.msgBoxOk('El correo electrónico ingresado no existe en la base de datos.', {
@@ -96,12 +83,12 @@ export default {
   }
 </script>
 <style lang="scss">
-.form-recup{
-  min-height: 503px;
+.recuperar{
   font-family: Verdana, sans-serif;
-  padding-left: 310px;
-  width: 990px;
-  align-content: center;
+    height: 527px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 footer {
   font-family: Verdana, sans-serif;
