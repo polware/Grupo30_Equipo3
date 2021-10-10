@@ -19,10 +19,10 @@
           <b-container class="bv-example-row">
             <b-row>
               <b-col sm><img src="../img/img_profile.jpg" alt="Perfil" width="150" height="150"></b-col>              
-              <b-col sm><img src="../img/Update.png" alt="Perfil" width="150" height="150"></b-col>
-              <b-col sm><img src="../img/Delete.png" alt="Perfil" width="150" height="150"></b-col>
-              <b-col sm><img src="../img/Test.png" alt="Perfil" width="150" height="150"></b-col>
-              <b-col sm><img src="../img/View_Results.png" alt="Perfil" width="150" height="150"></b-col>
+              <b-col sm><img src="../img/Update.jpg" alt="Actualizar" width="180" height="180"></b-col>
+              <b-col sm><img src="../img/Delete.png" alt="Borrar" width="150" height="150"></b-col>
+              <b-col sm><img src="../img/Test.png" alt="Test" width="150" height="150"></b-col>
+              <b-col sm><img src="../img/View_Results.png" alt="Resultados" width="150" height="150"></b-col>
             </b-row>
             <b-row>
               <b-col sm>ID de estudiante:</b-col>
@@ -33,12 +33,12 @@
             </b-row>
             <b-row>
               <b-col sm><br><input type="text" class="form-control" v-model="estudianteDatos.numident" disabled></b-col>
-              <b-col sm><br><router-link :to="{name: 'ActualizarDatos', params: {id:estudianteDatos._id} }" class="btn btn-primary">Actualizar Datos</router-link></b-col>
-              <b-col sm><br><router-link :to="{name: 'BorrarPerfil', params: {id:estudianteDatos._id} }" class="btn btn-primary">Eliminar Perfil</router-link></b-col>
-              <b-col sm><br><router-link :to="{name: 'Test', params: {id:estudianteDatos._id} }" class="btn btn-primary">Realizar Test</router-link></b-col>
-              <b-col sm><br><router-link :to="{name: 'Resultados', params: {id:estudianteDatos._id} }" class="btn btn-primary">Ver Resultados</router-link></b-col>              
+              <b-col sm><br><router-link :to="{name: 'ActualizarDatos', params: {numident:estudianteDatos.numident} }" class="btn btn-primary">Actualizar Datos</router-link></b-col>
+              <b-col sm><br><router-link :to="{name: 'BorrarPerfil', params: {numident:estudianteDatos.numident} }" class="btn btn-primary">Eliminar Perfil</router-link></b-col>
+              <b-col sm><br><router-link :to="{name: 'Test', params: {numident:estudianteDatos.numident} }" class="btn btn-primary">Realizar Test</router-link></b-col>
+              <b-col sm><br><router-link :to="{name: 'Resultados', params: {numident:estudianteDatos.numident} }" class="btn btn-primary">Ver Resultados</router-link></b-col>              
             </b-row>
-          </b-container>              
+          </b-container>
       </div>
       </form>
   </div>  
@@ -58,9 +58,20 @@ export default {
         }
     },
     created() {
-        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.id}`;
+        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.numident}`;
         axios.get(apiURL).then((res) => {
                 this.estudianteDatos = res.data
+                this.$bvModal.msgBoxOk('Hola ' +this.estudianteDatos.nombre +'.\nBienvenid@ a su página de Perfil.', {
+                    title: 'Bienvenida',
+                    size: 'sm',
+                    buttonSize: 'sm',
+                    okVariant: 'primary',
+                    headerClass: 'p-2 border-bottom-1',
+                    footerClass: 'p-2 border-top-1',
+                    headerBgVariant: 'primary',
+                    headerTextVariant: 'light',
+                    centered: true
+                    })
             })
             .catch(e=>{
                 console.log(e.response)
