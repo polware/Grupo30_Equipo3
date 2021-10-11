@@ -23,7 +23,8 @@ const routes = [
   {
     path: '/profile',
     name: 'Profile',
-    component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue')
+    component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue'),
+    props: true
   },
   {
     path: '/recuperarcuenta',
@@ -38,27 +39,32 @@ const routes = [
   {
     path: '/nuevopassword',
     name: 'NuevoPassword',
-    component: () => import(/* webpackChunkName: "nuevopassword" */ '../views/NuevoPassword.vue')
+    component: () => import(/* webpackChunkName: "nuevopassword" */ '../views/NuevoPassword.vue'),
+    props: true
   },
   {
     path: '/test',
     name: 'Test',
-    component: () => import(/* webpackChunkName: "test" */ '../views/Test.vue')
+    component: () => import(/* webpackChunkName: "test" */ '../views/Test.vue'),
+    props: true
   },  
   {
     path: '/actualizardatos',
     name: 'ActualizarDatos',
-    component: () => import(/* webpackChunkName: "actualizardatos" */ '../views/ActualizarDatos.vue')
+    component: () => import(/* webpackChunkName: "actualizardatos" */ '../views/ActualizarDatos.vue'),
+    props: true
   },
   {
     path: '/borrarperfil',
     name: 'BorrarPerfil',
-    component: () => import(/* webpackChunkName: "borrarperfil" */ '../views/BorrarPerfil.vue')
+    component: () => import(/* webpackChunkName: "borrarperfil" */ '../views/BorrarPerfil.vue'),
+    props: true
   },
   {
     path: '/resultados',
     name: 'Resultados',
-    component: () => import(/* webpackChunkName: "resultados" */ '../views/Resultados.vue')
+    component: () => import(/* webpackChunkName: "resultados" */ '../views/Resultados.vue'),
+    props: true
   },
   {
     path: '/estudiante',

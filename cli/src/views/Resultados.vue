@@ -61,8 +61,10 @@
 </div>
 </template>
 <script>
-import axios from "axios";
 export default {
+    props:{
+    numident:String
+    },
     data() {
         return {
             opcion: '',
@@ -74,9 +76,9 @@ export default {
             dismissCountDown: 0
         }
     },
-    created() {        
-        let apiURL = `http://localhost:3000/api/resultado/${this.$route.params.numident}`;
-        axios.get(apiURL).then((res) => {
+    created() {    
+        this.axios.get(`/resultado/${this.numident}`)
+            .then(res => {        
                 this.resultados = res.data
             })
             .catch(e=>{

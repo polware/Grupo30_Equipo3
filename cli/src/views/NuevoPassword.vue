@@ -8,8 +8,8 @@
             <br>            
             <p>Por favor ingresa la misma contraseña en ambos campos:</p>           
             <div class="input-fields">
-              <input id="pass-one" ref="pass1" name="password" type="password" placeholder="Contraseña Nueva" >&nbsp;
-              <input id="pass-two" ref="passtext" name="password_confirmation" type="password" placeholder="Repita Contraseña Nueva">
+              <input id="pass-one" ref="pass1" type="password" placeholder="Contraseña Nueva" >&nbsp;
+              <input id="pass-two" ref="passtext" type="password" placeholder="Repita Contraseña Nueva">
               <br>
             </div>
             <br>
@@ -22,12 +22,14 @@
 </div>
 </template>
 <script>
-import axios from "axios";
 import bcrypt from 'bcryptjs';
 export default {
+    props:{
+    numident: String
+    },
     data() {
         return {
-            registro:{},
+            estudiantes:[],
             estudianteDatos: {},
             mensaje: {color: '', texto: ''},
             dismissSecs: 5,
@@ -36,9 +38,9 @@ export default {
     },
     
     created() {
-        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.numident}`;
-        axios.get(apiURL).then((res) => {
-                this.registro = res.data
+        this.axios.get(`/estudiante/${this.numident}`)
+            .then(res => {
+                this.estudiantes = res.data
             })
             .catch(e=>{
                 console.log(e.response)
@@ -48,7 +50,7 @@ export default {
     methods: {
         verificar(){
             var pass1 = document.getElementById("pass-one");
-            var pass2 = document.getElementById("pass-two");            
+            var pass2 = document.getElementById("pass-two");
             var newpassword = this.$refs.passtext.value;
             if (pass1.value !== pass2.value) {
                 pass1.style.border = '3px solid red';
@@ -71,8 +73,8 @@ export default {
                 pass2.style.border = '3px solid green';
                 const salt = bcrypt.genSaltSync(10)
                 const hash = bcrypt.hashSync(newpassword, salt)
-                this.registro.password = hash;
-                this.estudianteDatos = {_id:this.registro._id, numident:this.registro.numident, password:this.registro.password, nombre:this.registro.nombre, apellido:this.registro.apellido, correo:this.registro.correo, fechanac:this.registro.fechanac, colegio:this.registro.colegio, ciudad:this.registro.ciudad};
+                this.estudiantes.password = hash;
+                this.estudianteDatos = {_id:this.estudiantes._id, numident:this.estudiantes.numident, password:this.estudiantes.password, nombre:this.estudiantes.nombre, apellido:this.estudiantes.apellido, correo:this.estudiantes.correo, fechanac:this.estudiantes.fechanac, colegio:this.estudiantes.colegio, ciudad:this.estudiantes.ciudad};
                 this.actualizarpass(this.estudianteDatos);
             }
         },

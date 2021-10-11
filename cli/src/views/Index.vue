@@ -29,9 +29,10 @@
   </div>
 </template>
 <script>
-export default {
+export default {  
     data() {
         return {
+            numident:'',
             registro:[],
             estudianteDatos: {},
             validacionEstudiante:{},

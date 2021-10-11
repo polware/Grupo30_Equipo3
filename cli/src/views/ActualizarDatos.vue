@@ -29,19 +29,22 @@
                 <input type="text" class="form-control-casilla" id="ciudad_actualizar" size="20" v-model="estudianteEditar.ciudad" required>&nbsp;
                 <label for="institucion_actualizar">Colegio/Institución:</label>
                 <input type="text" class="form-control-casilla" id="institucion_actualizar" size="20" v-model="estudianteEditar.colegio" required><br><br>
-                <b-button class="btn-warning my-2 mx-2" type="submit">Guardar</b-button>
-                <router-link :to="{name: 'Profile', params: {numident:estudianteEditar.numident} }" class="btn btn-secondary">Cancelar</router-link>
+                <b-button class="btn-warning my-2 mx-2" type="submit">Guardar</b-button>                
+                <b-button @click.prevent="ruta" class="btn-secondary my-2 mx-2" type="submit">Cancelar</b-button>
             </form>
         </div>
     </section>
 </div>
 </template>
 <script>
-import axios from "axios";
 import bcrypt from 'bcryptjs';
 export default {
+    props:{
+    numident:String
+    },
     data() {
         return {
+            ID:'',
             estudianteEditar: {},
             mensaje: {color: '', texto: ''},
             dismissSecs: 5,
@@ -49,9 +52,10 @@ export default {
         }
     },
     created() {
-        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.numident}`;
-        axios.get(apiURL).then((res) => {
+        this.axios.get(`/estudiante/${this.numident}`)
+        .then(res => {
                 this.estudianteEditar = res.data
+                this.ID = this.estudianteEditar.numident;
             })
             .catch(e=>{
                 console.log(e.response)
@@ -59,9 +63,12 @@ export default {
     },
 
     methods: {   
-        
+        ruta(){
+            this.$router.push({name: 'Profile', params: {numident:this.ID} })
+        },
+
         manejarDatos(registro) {
-            var password = this.estudianteEditar.password;
+	        var password = this.estudianteEditar.password;
             const salt = bcrypt.genSaltSync(10)
             const hash = bcrypt.hashSync(password, salt)
             this.estudianteEditar.password = hash;

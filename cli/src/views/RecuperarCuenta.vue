@@ -18,6 +18,7 @@
 export default {
     data() {
         return {
+          numident:'',
             usuarioEmail:'',
             registro:[],
             estudianteDatos: {},
@@ -47,7 +48,8 @@ export default {
             if (item.length > 0) {
                 const index = this.registro.findIndex(n => n.correo === aux);
                 this.estudianteDatos = {_id:this.registro[index]._id, numident:this.registro[index].numident, password:this.registro[index].password}
-                this.$router.push({name: 'NuevoPassword', params: {numident:this.estudianteDatos.numident} })                
+                this.numident = this.estudianteDatos.numident;
+                this.$router.push({name: 'NuevoPassword', params: {numident:this.numident} })                
             }
             else {
                   this.$bvModal.msgBoxOk('El correo electrónico ingresado no existe en la base de datos.', {

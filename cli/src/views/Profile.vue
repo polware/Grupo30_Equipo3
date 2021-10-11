@@ -1,13 +1,6 @@
 <template>
   <div class="profile">
-  <b-alert
-        :show="dismissCountDown"
-        dismissible
-        :variant="mensaje.color"
-        @dismissed="dismissCountDown=0"
-        @dismiss-count-down="countDownChanged">
-        {{mensaje.texto}}
-  </b-alert>
+  
   <div class="section">
           <br>
           <br>
@@ -32,7 +25,7 @@
               <b-col sm></b-col>
             </b-row>
             <b-row>
-              <b-col sm><br><input type="text" class="form-control" v-model="estudianteDatos.numident" disabled></b-col>
+              <b-col sm><br><label for="id" class="inputlabel" ref="identidad">{{ numident }}</label></b-col>
               <b-col sm><br><router-link :to="{name: 'ActualizarDatos', params: {numident:estudianteDatos.numident} }" class="btn btn-primary">Actualizar Datos</router-link></b-col>
               <b-col sm><br><router-link :to="{name: 'BorrarPerfil', params: {numident:estudianteDatos.numident} }" class="btn btn-primary">Eliminar Perfil</router-link></b-col>
               <b-col sm><br><router-link :to="{name: 'Test', params: {numident:estudianteDatos.numident} }" class="btn btn-primary">Realizar Test</router-link></b-col>
@@ -41,12 +34,14 @@
           </b-container>
       </div>
       </form>
-  </div>  
+  </div>
 </div>
 </template>
 <script>
-import axios from "axios";
 export default {
+  props:{
+    numident: String
+    },
     data() {
         return {
             registro:[],
@@ -57,9 +52,10 @@ export default {
             dismissCountDown: 0
         }
     },
-    created() {
-        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.numident}`;
-        axios.get(apiURL).then((res) => {
+    
+    created(){
+        this.axios.get(`/estudiante/${this.numident}`)
+            .then(res => {
                 this.estudianteDatos = res.data
                 this.$bvModal.msgBoxOk('Hola ' +this.estudianteDatos.nombre +'.\nBienvenid@ a su página de Perfil.', {
                     title: 'Bienvenida',
@@ -73,11 +69,10 @@ export default {
                     centered: true
                     })
             })
-            .catch(e=>{
-                console.log(e.response)
-            })       
+            .catch(e => {
+               console.log(e.response);
+            })
     },
-    
     methods: {
 
         countDownChanged(dismissCountDown) {
@@ -106,6 +101,10 @@ export default {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+.inputlabel {
+   color: rgb(255, 255, 255);
+   background-color: #0d6efd;
 }
 footer {
   font-family: Verdana, sans-serif;
