@@ -185,7 +185,7 @@ export default {
 .resultados{
     font-family: Verdana, sans-serif;
     overflow: auto;
-    height: 517px;
+    height: 527px;
     display: flex;
     flex-direction: column;
     align-items: center;
