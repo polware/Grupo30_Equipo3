@@ -8,6 +8,7 @@
                 <li style="color: #152beb;">Lee atentamente cada pregunta.</li>
                 <li style="color: #152beb;">Marca un SI el número de la pregunta que contestes afirmativamente y NO si la pregunta no es afirmativa.</li>
                 <li style="color: #152beb;">Responde a todas las preguntas sin omitir ninguna.</li>
+                 <li style="color: #152beb;">Si te faltó alguna pregunta contestala y dile nuevamente siguiente.</li>
             </ol>
             <ol style="text-align: left;">
                 <li>¿Aceptarías trabajar escribiendo artículos en la sección económica de un diario?</li>
@@ -450,6 +451,8 @@ export default {
           let message = "Estimado usuario no ha contestado la pregunta: ";
           var c=0, h=0, a=0, s=0, i=0, d=0,e=0, C=0, H=0, A=0, S=0, I=0, D=0, E=0, letraIntereses='', letraAptitudes='', ramaSugerInt='', ramaSugerApt='', Preafirm=0;
           let x = false;
+          let aprovResult = false;
+          let contiResult = false;
           
             for(let j=0; j<this.listadopreg.length; j++)
             {
@@ -460,7 +463,7 @@ export default {
               else
               {
                 x=true;
-                var y = new Number(i+1);
+                var y = new Number(j+1);
                 message=message.concat(y.toString())
                 message=message.concat(", ")
               }
@@ -471,8 +474,11 @@ export default {
             }
             else {
               alert("Ha contestado todas las preguntas.")
+              aprovResult = true;
             }
-            for (let l=0;l<this.listadopreg.length; l++ ) {
+            if(aprovResult)
+            {
+              for (let l=0;l<this.listadopreg.length; l++ ) {
               if(this.listadopreg[l].res === 1){
                   {
                 let intereses = [98,9,21,33,75,84,77,12,34,45,92,6,31,42,64,80,96,70,19,48,88,53,25,57,8,38,73,17,85,95,28,87,60,5,93,1,67,11,62,27,65,32,78,41,5,23,83,14,68,20,74,3,44,54,37,49,71,56,81,16,47,58,35,91,89,36,52,97,24,61];
@@ -563,73 +569,59 @@ export default {
             var calMaximoAptitudes = Math.max(...respuestaAptitudes);
             Preafirm=c+h+a+s+i+d+e+C+H+A+S+I+D+E;
              if(respuestaIntereses[0]==calMaximoIntereses) {
-                alert('C - Administrativas y Contables')
                 letraIntereses='C';
                 ramaSugerInt='Administrativas y Contables';
 
             }
             if(respuestaIntereses[1]==calMaximoIntereses){
-              alert('H - Humanisticas y sociales')
               letraIntereses='H';
               ramaSugerInt='Humanisticas y sociales';
             }
             if(respuestaIntereses[2]==calMaximoIntereses){
-              alert('A - Artisticas ')
               letraIntereses='A';
               ramaSugerInt='Artisticas';
             }
             if(respuestaIntereses[3]==calMaximoIntereses){
-              alert('S - Medicina y Cs de la salud')
               letraIntereses='S';
               ramaSugerInt='Medicina y Cs de la salud';
             }
             if(respuestaIntereses[4]==calMaximoIntereses){
-              alert('I - Ingenieria y Computacion')
               letraIntereses='I';
               ramaSugerInt='Ingenieria y Computacion';
             }
             if(respuestaIntereses[5]==calMaximoIntereses){
-               alert('D - Defensa y seguridad')
               letraIntereses='D';
               ramaSugerInt=' Defensa y seguridad';
             }
             if(respuestaIntereses[6]==calMaximoIntereses){
-               alert('E - Ciencias exactas y agrarias')
               letraIntereses='E';
               ramaSugerInt=' Ciencias exactas y agrarias';
             }
             if(respuestaAptitudes[0]==calMaximoAptitudes) {
-              alert('C - Administrativas y Contables')
               letraAptitudes='C';
               ramaSugerApt='Administrativas y Contables';
             }
             if(respuestaAptitudes[1]==calMaximoAptitudes) {
-              alert('H - Humanisticas y sociales')
               letraAptitudes='H';
               ramaSugerApt='Humanisticas y sociales';
             }
             if(respuestaAptitudes[2]==calMaximoAptitudes) {
-              alert('A - Artisticas ')
               letraAptitudes='A';
               ramaSugerApt='Artisticas';
             }
             if(respuestaAptitudes[3]==calMaximoAptitudes) {
-              alert('S - Medicina y Cs de la salud')
               letraAptitudes='S';
               ramaSugerApt='Medicina y Cs de la salud';
             }
             if(respuestaAptitudes[4]==calMaximoAptitudes) {
-                alert('I - Ingenieria y Computacion')
                 letraAptitudes='I';
                 ramaSugerApt='Ingenieria y Computacion';
             }
             if(respuestaAptitudes[5]==calMaximoAptitudes) {
-                alert('D - Defensa y seguridad')
                 letraAptitudes='D';
                 ramaSugerApt='Defensa y seguridad';
             }
             if(respuestaAptitudes[6]==calMaximoAptitudes) {
-                alert('E - Ciencias exactas y agrarias')
                 letraAptitudes='E';
                 ramaSugerApt='Ciencias exactas y agrarias';
             }
@@ -641,10 +633,18 @@ export default {
             this.studentresult.preafirm = Preafirm;
             this.estudianteEditar = {_id:this.studentresult._id, numident:this.studentresult.numident, estado:nouso, letraintereses:this.studentresult.letraintereses, puntajeintereses:nouso, ramasugerint:this.studentresult.ramasugerint, letraaptitudes:this.studentresult.letraaptitudes, puntajeaptitudes:nouso, ramasugerapt:this.studentresult.ramasugerapt, preafirm:this.studentresult.preafirm};
             this.guardarResult(this.estudianteEditar);
+            contiResult=true;
+            
+
+            }
+            
 
         },
-        ruta(){
-	        this.$router.push({name: 'Resultados', params: {numident:this.studentresult.numident} })
+         ruta(){
+          if(contiResult){
+            this.$router.push({name: 'Resultados', params: {numident:this.studentresult.numident} })
+          }
+	          
 	      },
         guardarResult(registro){
           this.axios.put(`/resultado/${registro._id}`, registro)
@@ -661,6 +661,7 @@ export default {
             this.resultados[indice].preafirm = res.data.preafirm;
             
           })
+          
           .catch(e => {
             console.log(e.response);
           })
