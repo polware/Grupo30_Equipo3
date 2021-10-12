@@ -34,7 +34,8 @@
             </div>
             <div class="col-12">
               <br>
-              <b-button type="submit" class="btn btn-success casilla">Registrar</b-button>
+              <b-button type="submit" class="btn btn-success casilla">Registrar</b-button>&nbsp;
+              <router-link to="/"><b-button class="btn-primary my-2 mx-2">Regresar</b-button></router-link>
               <br>
               <br>              
             </div>
@@ -49,7 +50,7 @@ export default {
     data() {
         return {
             estudiantes:[],
-	    resultados:[],
+	        resultados:[],
             objEstudiante:{numident:'', password:'', nombre:'', apellido:'', correo:'', fechanac:'', colegio:'', ciudad:''},
             objResultado:{numident:'', estado:'', letraintereses:'', puntajeintereses:'', ramasugerint:'', letraaptitudes:'', puntajeaptitudes:'', ramasugerapt:'', preafirm:''},
             mensaje: {color: '', texto: ''},
@@ -104,13 +105,12 @@ export default {
                     title: 'Confirmación:',
                     size: 'sm',
                     buttonSize: 'sm',
-                    okVariant: 'secondary',
+                    okVariant: 'success',
                     headerClass: 'p-2 border-bottom-1',
                     footerClass: 'p-2 border-top-1',
-                    headerBgVariant: 'secondary',
+                    headerBgVariant: 'success',
                     headerTextVariant: 'light',
-                    bodyBgVariant: 'light',
-                    footerBgVariant: 'light',
+                    //footerBgVariant: 'light',
                     centered: true
                     })
             })
@@ -193,14 +193,16 @@ h2 {
 }
 //Estilos de la pagina CrearCuenta
 .modal-content{
-    background-color: LightGray;
-    opacity: .85;
+    //background-color: LightGray;
+    //opacity: .85;
     padding: 20px;
-    box-shadow: 0px 0px 3px black;
+    //box-shadow: 0px 0px 3px black;
 }
+/*
 .casilla{
-    box-shadow: 0px 0px 3px black; 
+    //box-shadow: 0px 0px 3px black; 
 }
+*/
 .col-md-6 input{
     text-align: center;
 }

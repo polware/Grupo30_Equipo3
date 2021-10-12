@@ -68,6 +68,7 @@ export default {
     data() {
         return {
             opcion: '',
+	    ID:'',
             activarepetir: false,
             resultados:[],
             resultadoEditar: {},
@@ -76,10 +77,11 @@ export default {
             dismissCountDown: 0
         }
     },
-    created() {    
+    created() {        
         this.axios.get(`/resultado/${this.numident}`)
-            .then(res => {        
+            .then(res => {
                 this.resultados = res.data
+		this.ID = this.resultados.numident;
             })
             .catch(e=>{
                 console.log(e.response)
@@ -151,7 +153,7 @@ export default {
         },
 
       ruta(){
-            this.$router.push({name: 'Test', params: {id:this.resultadoEditar._id} })
+            this.$router.push({name: 'Test', params: {numident:this.ID} })
 	    },
 
       countDownChanged(dismissCountDown) {
