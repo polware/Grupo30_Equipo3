@@ -84,8 +84,10 @@
 </div>
 </template>
 <script>
-import axios from "axios";
-export default {    
+export default {
+    props:{
+    numident:String
+    },
     data() {
         return {
             estudianteBorrar:{},
@@ -98,8 +100,8 @@ export default {
         }
     },
     created() {
-        let apiURL = `http://localhost:3000/api/estudiante/${this.$route.params.numident}`;
-        axios.get(apiURL).then((res) => {
+        this.axios.get(`/estudiante/${this.numident}`)
+            .then(res => {
                 this.estudianteBorrar = res.data
                 this.ID = this.estudianteBorrar.numident;
             })

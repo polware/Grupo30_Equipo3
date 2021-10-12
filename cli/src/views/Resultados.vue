@@ -61,11 +61,14 @@
 </div>
 </template>
 <script>
-import axios from "axios";
 export default {
+    props:{
+    numident:String
+    },
     data() {
         return {
             opcion: '',
+	    ID:'',
             activarepetir: false,
             resultados:[],
             resultadoEditar: {},
@@ -75,9 +78,10 @@ export default {
         }
     },
     created() {        
-        let apiURL = `http://localhost:3000/api/resultado/${this.$route.params.numident}`;
-        axios.get(apiURL).then((res) => {
+        this.axios.get(`/resultado/${this.numident}`)
+            .then(res => {
                 this.resultados = res.data
+		this.ID = this.resultados.numident;
             })
             .catch(e=>{
                 console.log(e.response)
@@ -149,7 +153,7 @@ export default {
         },
 
       ruta(){
-            this.$router.push({name: 'Test', params: {id:this.resultadoEditar._id} })
+            this.$router.push({name: 'Test', params: {numident:this.ID} })
 	    },
 
       countDownChanged(dismissCountDown) {
