@@ -2,7 +2,7 @@
   <div id="app">
   <div id="nav">
     <nav class="container navbar navbar-expand-lg navbar-light bg-primary">
-      <img src="./img/Logo.jpg" alt="Logo" width="200" height="134">
+      <img src="./img/Logo.jpg" alt="Logo" width="250" height="141">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -21,7 +21,7 @@
       <div class="content has-text-centered">
           <b-container class="bv-example-row">
             <b-row>
-              <b-col sm><br><br><img src="./img/Eslogan.jpeg" alt="Growing Skills" width="226" height="87"></b-col>
+              <b-col sm><br><br><img src="./img/Eslogan.jpg" alt="Growing Skills" width="226" height="87"></b-col>
               <b-col sm><br><h5>Integrantes Equipo 3</h5>Paul H. Vargas<br />Juan Pablo Pinzón<br />Jessica D. Páez<br />Laura Pacheco<br />Andrés Felipe Cruz</b-col>
               <b-col sm><br><h5>Agradecimientos</h5>Ministerio TIC<br />Universidad Tecnológica de Pereira<br />Grace Fernández<br />Carlos A. Peña R.</b-col>
               <b-col sm><br><br><a class="navbar-brand" href="https://www.misiontic2022.gov.co/portal/" target="_blank">

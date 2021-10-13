@@ -101,7 +101,7 @@ export default {
 </script>
 <style lang="scss">
 section {
-  height: 527px;
+  height: 520px;
   font-family: Verdana, sans-serif;
   color: rgb(21, 43, 235);
   display: flex;

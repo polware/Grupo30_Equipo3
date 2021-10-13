@@ -44,8 +44,9 @@
             <td>{{item.colegio}}</td>
             <td>{{item.ciudad}}</td>
             <td>
-                <b-button @click="eliminarEstud(item._id)" class="btn-danger btn-sm mx-2">Eliminar</b-button>
-                <b-button @click="activarEdicion(item.numident)" class="btn-warning btn-sm">Editar</b-button>
+	        <b-button @click="activarEdicion(item.numident)" class="btn-warning btn-sm">Editar</b-button>
+		<b-button @click="eliminarEstud(item._id)" class="btn-danger btn-sm mx-2">Eliminar</b-button>
+                
             </td>
             </tr>
             </tbody>
