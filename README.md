@@ -1,5 +1,5 @@
 # MinTIC 2022 Ciclo 3
-## **Repositorio del proyecto de página web usando la pila MEVN (MongoDB, Express.js, Vue.js y Node.js).**<br/>
+## **Repositorio de aplicación web usando la pila MEVN (MongoDB, Express.js, Vue.js y Node.js).**<br/>
 Integrantes Grupo30 Equipo3:<br/>
 Paul H. Vargas P.<br/>
 Jessica D. Páez J.<br/>
